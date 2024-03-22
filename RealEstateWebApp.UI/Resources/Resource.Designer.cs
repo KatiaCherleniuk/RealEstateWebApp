@@ -61,7 +61,7 @@ namespace RealEstateWebApp.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en-US.
+        ///   Looks up a localized string similar to English.
         /// </summary>
         public static string en_US {
             get {
@@ -70,16 +70,7 @@ namespace RealEstateWebApp.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login.
-        /// </summary>
-        public static string Login {
-            get {
-                return ResourceManager.GetString("Login", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to pl-PL.
+        ///   Looks up a localized string similar to Polish.
         /// </summary>
         public static string pl_PL {
             get {
@@ -88,7 +79,7 @@ namespace RealEstateWebApp.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to uk-UA.
+        ///   Looks up a localized string similar to Ukrainian.
         /// </summary>
         public static string uk_UA {
             get {
