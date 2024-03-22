@@ -1,0 +1,26 @@
+﻿<div class="blazored-modal-container @Position">
+
+    <div class="modal fade show" style="display: @(DisableBackgroundColor ? "none" : "block");" @onclick="HandleBackgroundClick"></div>
+
+    <div class="modal-dialog @Size">
+        <div class="@Class modal-content">
+            @if (!HideHeader)
+            {
+                <div class="modal-header">
+                        <h3 class="modal-title  @(IsCenteredTitle ? "centered" : "")">@Title</h3>
+                        @if (!HideCloseButton)
+                        {
+                            <button type="button" class="btn-close" @onclick="(() => Parent.CancelInstance(Id))">
+                                <i class="las la-times"></i>
+                            </button>
+                        }
+                </div>
+            }
+            <div class="modal-body">
+                <CascadingValue Value="this">
+                    @Content
+                </CascadingValue>
+            </div>
+        </div>
+    </div>
+</div>

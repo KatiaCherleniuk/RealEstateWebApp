@@ -1,0 +1,24 @@
+﻿<div class="menu-container flex-grow-1">
+    <ul id="menu" class="menu show">
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="label">Categories</span>
+            </a>
+            <ul class="dropdown-menu opacityIn main-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                @foreach (var category in _categories)
+                {
+                    <li class="dropdown-item">
+                        <a href="/category/@category.Id">
+                            <span class="label">@category.Title</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+        <li>
+            <a href="/Settings" role="button">
+                <span class="label">Settings</span>
+            </a>
+        </li>
+    </ul>
+</div>

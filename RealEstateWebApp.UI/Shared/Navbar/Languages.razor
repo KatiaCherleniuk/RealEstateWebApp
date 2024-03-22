@@ -1,0 +1,11 @@
+﻿<div class="language-switch-container">
+    <button class="btn btn-empty language-button dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Localizer[$"{CurrentCulture.Name}"]</button>
+    <div class="dropdown-menu">
+        @foreach (var language in supportedCultures)
+        {
+            <li class="dropdown-item cursor-pointer" @onclick='() => ChangeLocalization(language)'>
+                @Localizer[$"{language}"]
+            </li>
+        }
+    </div>
+</div>

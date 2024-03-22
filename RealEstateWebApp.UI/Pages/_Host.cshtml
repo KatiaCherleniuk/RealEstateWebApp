@@ -1,0 +1,74 @@
+﻿@page "/"
+
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+@namespace RealEstateWebApp.UI.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+
+    this.HttpContext.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(
+            new RequestCulture(
+                CultureInfo.CurrentCulture,
+                CultureInfo.CurrentUICulture)));
+
+}
+
+<!DOCTYPE html>
+<html data-placement="horizontal" data-behaviour="pinned" data-layout="fluid" data-radius="rounded" data-color="light-blue" data-navcolor="default" data-lt-installed="true" data-show="true" data-dimension="desktop" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>RealEstateWebApp</title>
+    <base href="~/" />
+
+    <link rel="icon" type="image/png" href="/img/logo/logo196x196.png" sizes="196x196">
+    <link rel="icon" type="image/png" href="/img/logo/logo128x128.png" sizes="128x128">
+    <link rel="icon" type="image/png" href="/img/logo/logo96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/logo/logo32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/logo/logo16x16.png" sizes="16x16">
+
+
+    
+    <!-- Font Tags Start -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet" />
+    <!-- Font Tags End -->
+    <!-- Vendor Styles Start -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome-pro/font-awesome-pro/css/all.min.css">
+    <!-- Vendor Styles End -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+
+</head>
+<body>
+
+    <component type="typeof(App)" render-mode="Server" />
+
+    @* @await Html.PartialAsync("_BlazorError")  *@
+
+    <script src="js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+    <script src="js/scrollObserver.js"></script>
+    <script src="js/TableResize.js"></script>
+    <script src="js/settingsSortable.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/map.js"></script>
+
+    <link rel="stylesheet" href="js/vendor/jquery-ui-1.13.0.custom/jquery-ui.min.css">
+    <script src="js/vendor/jquery-ui-1.13.0.custom/external/jquery/jquery-3.6.0.min.js"></script>
+    <script src="js/vendor/jquery-ui-1.13.0.custom/jquery-ui.min.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+</body>
+</html>

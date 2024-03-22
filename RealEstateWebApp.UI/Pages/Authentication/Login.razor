@@ -1,0 +1,37 @@
+﻿@page "/login"
+
+<div class="mb-5">
+    <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
+    <h2 class="cta-1 text-primary">let's get started!</h2>
+</div>
+<Indicator Name="login">
+    <div class="mb-5">
+        <p class="h6">Please use your credentials to login.</p>
+        <p class="h6">
+            If you are not a member, please
+        </p>
+    </div>
+    <form class="tooltip-end-bottom" id="LoginForm" method="Post" action="/User/Login?returnUrl=@_returnUrl">
+        <div class="mb-3 filled form-group tooltip-end-top">
+            <i data-cs-icon="email"></i>
+            <input class="form-control" placeholder="Login" name="login" @bind-value="_login"/>
+        </div>
+        <div class="mb-3 filled form-group tooltip-end-top">
+            <i data-cs-icon="lock-off"></i>
+            <input class="form-control pe-7" name="password" type="password" placeholder="Password" @bind-value="_password"/>
+            <a class="text-small position-absolute t-3 e-3" href="/forgot-password">Forgot?</a>
+        </div>
+        @if (_attempt != null && !_attempt.Succeeded)
+        {
+            if (_attempt.IsLockedOut)
+            {
+                <div class="invalid-feedback">Login for such user is temporary blocked</div>
+            }
+            else
+            {
+                <div class="invalid-feedback">There's no user with such email and password</div>
+            }
+        }
+        <a class="btn btn-lg btn-primary" @onclick="DoLogin" href="#" @onclick:preventDefault>@Localizer["Login"]</a>
+    </form>
+</Indicator>

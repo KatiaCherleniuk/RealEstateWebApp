@@ -1,0 +1,11 @@
+﻿@if (_isLoadingProcess)
+{
+    @RenderLoader();
+}
+
+@if (IsChildContentShouldBeInTree())
+{
+    <div style="@ChildContentCss()" class="@CssClass">
+        @ChildContent
+    </div>
+}

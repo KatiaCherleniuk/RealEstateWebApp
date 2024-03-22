@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+@using RealEstateWebApp.UI.Components.ToastComponent
+@using RealEstateWebApp.UI.Components.ToastComponent.Configuration
+@using RealEstateWebApp.UI.Shared.Navbar
+@using RealEstateWebApp.UI.Components.ModalComponent
+
+<AuthorizeView>
+    <Authorized>
+        <BlazoredModal/>
+        <BlazoredToasts Position="ToastPosition.BottomRight"
+                        Timeout="10"
+                        SuccessClass="success-toast-override"
+                        SuccessIconClass="fa fa-thumbs-up"
+                        ErrorIconClass="fa fa-bug"/>
+
+        <div id="root">
+            <NavMenu/>
+            <main id="main">
+                <div class="container">
+                    @Body
+                </div>
+            </main>
+        </div>
+    </Authorized>
+</AuthorizeView>

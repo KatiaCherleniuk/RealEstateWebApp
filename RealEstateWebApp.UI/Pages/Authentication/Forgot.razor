@@ -1,0 +1,23 @@
+﻿@page "/forgot-password"
+
+<div class="mb-5">
+    <h2 class="cta-1 mb-0 text-primary">Password is gone?</h2>
+    <h2 class="cta-1 text-primary">Let's reset it!</h2>
+</div>
+<div class="mb-5">
+    <p class="h6">Please enter your email to receive a link to reset your password.</p>
+    <p class="h6">
+        If you are a member, please
+        <a href="/login">login</a>
+        .
+    </p>
+</div>
+<div>
+    <form id="forgotPasswordForm" class="tooltip-end-bottom" novalidate>
+        <div class="mb-3 filled form-group tooltip-end-top">
+            <i data-cs-icon="email"></i>
+            <input class="form-control" placeholder="Email" name="forgotPasswordEmail" />
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Send Reset Email</button>
+    </form>
+</div>
