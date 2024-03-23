@@ -1,0 +1,4 @@
+﻿@typeparam TValue
+<span class="dropdown-item tag-item @(Selected ? "tag-item-selected" : "")" style="color: @HexColor" @onclick="e => TagBox.HandleSelect(this)">
+    @ChildContent(Value)
+</span>

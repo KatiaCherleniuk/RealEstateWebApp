@@ -6658,7 +6658,8 @@ input[type='file']::file-selector-button {
 
 .page-item.active .page-link {
   background: var(--primary);
-  box-shadow: initial !important; }
+  box-shadow: initial !important; 
+  cursor: pointer}
 
 .page-item.disabled .page-link {
   opacity: 0.5;

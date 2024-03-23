@@ -1,4 +1,4 @@
-using RealEstateWebApp.Business;
+﻿using RealEstateWebApp.Business;
 using RealEstateWebApp.Business.Identity;
 using RealEstateWebApp.Models.User;
 using RealEstateWebApp.UI.Components.LoadIndicatorLiteComponent;
@@ -48,7 +48,11 @@ app.UseRouting();
 app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
-app.MapFallbackToPage("/category/{CategoryId:int}/{*Filter}", "/_Host");
+//app.MapFallbackToPage("/admin/category/{CategoryId:int}/{*Filter}", "/_Host");
+//app.MapFallbackToPage("/category/{CategoryId:int}/{*Filter}", "/_Host");
+//app.MapFallbackToPage("/admin/{*clientroutes:nonfile}", "/admin/dashboard");
+//app.MapFallbackToPage("/Admin/RecordsAsTable");
+
 
 app.UseRequestLocalization(AddLocalizationOptions());
 
@@ -61,6 +65,7 @@ void AddUiServices(IServiceCollection services, Action<IndicatorOptions> options
     services.AddProgressIndicatorLite();
     services.AddBlazorToast();
     services.AddBlazoredModal();
+    services.AddScoped<FiltersWatcher>();
 
     var options = new IndicatorOptions();
     optionsBuilder?.Invoke(options);
@@ -81,15 +86,15 @@ void ConfigureServices(IServiceCollection services)
 
 void AddBusiness(IServiceCollection services)
 {
-    /*services.AddSingleton<CategoryService>();
-    services.AddSingleton<PropertyService>();
-    services.AddSingleton<PropertyValueService>();
+    /*
     services.AddSingleton<RecordValueService>();
-    services.AddSingleton<RecordService>();
-    services.AddSingleton<FileService>();
     services.AddScoped<UserSettingsService>();
     services.AddScoped<RecordFieldsUserSettingsService>();*/
-
+    services.AddSingleton<FileService>();
+    services.AddSingleton<CategoryService>();
+    services.AddSingleton<PropertyService>();
+    services.AddSingleton<PropertyValueService>();
+    services.AddSingleton<RecordService>();
     services.AddScoped<UserService>();
 }
 void AddDataAccess(IServiceCollection services)

@@ -1,0 +1,45 @@
+﻿@using RealEstateWebApp.Models.Property
+@using RealEstateWebApp.UI.Components.DelayedInputComponent
+@using RealEstateWebApp.UI.Components.SelectComponent
+@using RealEstateWebApp.UI.Components.TagBoxComponent
+<div class="filter-element-row">
+    <label class="form-label">@Property?.Title</label>
+    @switch (Property.Type)
+    {
+        case PropertyType.Text:
+            <DelayedInput DelayMs="300" ClassList="form-control form-control-sm" @bind-Value="_stringValue" OnValueChanged="ValueChanged"/>
+            break;
+        case PropertyType.Int:
+            <div class="filter-row">
+                <DelayedInput DelayMs="300" ClassList="form-control form-control-sm filter-control-col" Placeholder="min" @bind-Value="_minValue" OnValueChanged="ValueChanged"/>
+                <DelayedInput DelayMs="300" ClassList="form-control form-control-sm filter-control-col" Placeholder="max" @bind-Value="_maxValue" OnValueChanged="ValueChanged"/>
+            </div>
+            break;
+        case PropertyType.Float:
+            <div class="filter-row">
+                <DelayedInput DelayMs="300" ClassList="form-control form-control-sm filter-control-col" Placeholder="min" @bind-Value="_minValue" OnValueChanged="ValueChanged"/>
+                <DelayedInput DelayMs="300" ClassList="form-control form-control-sm filter-control-col" Placeholder="max" @bind-Value="_maxValue" OnValueChanged="ValueChanged"/>
+            </div>
+            break;
+        case PropertyType.ListSingle:
+            <DropdownSelect @bind-Value="_selectItem" OnValueChanged="ValueChanged" IsRemoveAllAllowed="true">
+                @foreach (var val in Property.Values)
+                {
+                    <SelectItem Value="val.Id">@val.Title</SelectItem>
+                }
+            </DropdownSelect>
+            break;
+        case PropertyType.ListMultiple:
+            <TagBox @bind-Value="_selectItems" OnValueChanged="ValueChanged" IsRemoveAllAllowed="true">
+                @foreach (var val in Property.Values)
+                {
+                    <TagBoxItem Value="val.Id">@val.Title</TagBoxItem>
+                }
+            </TagBox>
+            break;
+        case PropertyType.Address:
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
+</div>

@@ -10,13 +10,11 @@ namespace RealEstateWebApp.UI.Shared.Navbar
 {
     public partial class Items : ComponentBase //, IDisposable
     {
-        /*[Inject] private CategoryListWatcher CategoryListWatcher { get; set; }
-        [Inject] private CategoryService CategoryService { get; set; }*/
+        [Inject] private CategoryService CategoryService { get; set; }
         
         private IEnumerable<TitleAndIdModel> _categories = new List<TitleAndIdModel>();
         protected override async Task OnInitializedAsync()
         {
-            //CategoryListWatcher.ListChanged += ReloadCategories;
             await ReloadCategoriesAsync();
         }
 
@@ -27,13 +25,7 @@ namespace RealEstateWebApp.UI.Shared.Navbar
         
         private async Task ReloadCategoriesAsync()
         {
-            // _categories = await CategoryService.GetAllTitleOnly();
-            _categories = new List<TitleAndIdModel>();
+             _categories = await CategoryService.GetAllTitleOnly();
         }
-
-        /*public void Dispose()
-        {
-            CategoryListWatcher.ListChanged -= ReloadCategories;
-        }*/
     }
 }

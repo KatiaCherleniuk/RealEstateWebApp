@@ -3,18 +3,20 @@
 @using RealEstateWebApp.UI.Components.ToastComponent.Configuration
 @using RealEstateWebApp.UI.Shared.Navbar
 @using RealEstateWebApp.UI.Components.ModalComponent
+@using RealEstateWebApp.UI.Pages.Authentication
+@using RealEstateWebApp.UI.Pages.Admin
 
 <AuthorizeView>
     <Authorized>
-        <BlazoredModal/>
+        <BlazoredModal />
         <BlazoredToasts Position="ToastPosition.BottomRight"
                         Timeout="10"
                         SuccessClass="success-toast-override"
                         SuccessIconClass="fa fa-thumbs-up"
-                        ErrorIconClass="fa fa-bug"/>
+                        ErrorIconClass="fa fa-bug" />
 
         <div id="root">
-            <NavMenu/>
+            <NavMenu />
             <main id="main">
                 <div class="container">
                     @Body

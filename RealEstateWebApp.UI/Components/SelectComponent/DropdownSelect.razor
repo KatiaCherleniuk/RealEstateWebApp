@@ -1,0 +1,20 @@
+﻿@typeparam TValue
+<div class="btn-group w-100 mb-1">
+    <button
+        class="form-control w-100 dropdown-toggle dropdown-select"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true" disabled="@Disabled"
+        aria-expanded="false">
+        @_text
+        @if (IsRemoveAllAllowed && !IsSame(_value, default))
+        {
+            <i class="lar la-times-circle remove-selection" @onclick="RemoveSelection" @onclick:stopPropagation="true" @onclick:preventDefault="true"></i>
+        }
+    </button>
+    <div class="dropdown-menu w-100">
+        <CascadingValue name="SelectContainer" Value="@this">
+            @ChildContent
+        </CascadingValue>
+    </div>
+</div>

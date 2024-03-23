@@ -1,0 +1,31 @@
+﻿<ul class="pagination pt-3">
+    <li class="page-item @(CurrentStep == 1 ? "disabled" : "")">
+        <a class="page-link" tabindex="-1" aria-disabled="@(CurrentStep == 1 ? "true" : "false")" @onclick="() => OnStepClicked(CurrentStep - 1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-left undefined">
+                <path d="M13 16L7.35355 10.3536C7.15829 10.1583 7.15829 9.84171 7.35355 9.64645L13 4"></path>
+            </svg>
+        </a>
+    </li>
+    @if (CurrentStep > 1)
+    {
+        <li class="page-item">
+            <a class="page-link" @onclick="() => OnStepClicked(CurrentStep - 1)">@((CurrentStep - 1))</a>
+        </li>
+    }
+    <li class="page-item active">
+        <a class="page-link">@CurrentStep</a>
+    </li>
+    @if (CurrentStep < TotalSteps)
+    {
+        <li class="page-item">
+            <a class="page-link" @onclick="() => OnStepClicked(CurrentStep + 1)">@((CurrentStep + 1))</a>
+        </li>
+    }
+    <li class="page-item @(CurrentStep == TotalSteps ? "disabled" : "")">
+        <a class="page-link" @onclick="() => OnStepClicked(CurrentStep + 1)" aria-disabled="@(CurrentStep == TotalSteps ? "true" : "false")">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-chevron-right undefined">
+                <path d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path>
+            </svg>
+        </a>
+    </li>
+</ul>

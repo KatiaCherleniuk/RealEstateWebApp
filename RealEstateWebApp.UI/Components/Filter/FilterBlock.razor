@@ -1,0 +1,37 @@
+﻿<div id="filterBlock-backdrop" class="modal-backdrop fade show @(_filterBlockState == FilterBlockState.Show ? "" : "d-none")" @onclick="ToggleShowModal"></div>
+
+@if (_filterBlockState == FilterBlockState.Hide)
+{
+    <div id="filterBlock-btn" @onclick="ToggleShowModal">
+        <i class="las la-filter"></i>
+    </div> 
+}
+
+<div id="filterBlock" class="card @(_filterBlockState switch
+                                        {
+                                            FilterBlockState.Show => "absolute",
+                                            FilterBlockState.Hide => "d-none",
+                                            FilterBlockState.Static => ""
+                                            })">
+    <div class="card-top-buttons">
+        <button class="btn btn-sm btn-icon btn-icon-only btn-foreground hover-outline mb-1" type="button" @onclick="TogglePinModal">
+            <i class="las la-thumbtack"></i>
+        </button>
+        <button class="btn btn-sm btn-icon btn-icon-only btn-foreground hover-outline mb-1" type="button" @onclick="ToggleShowModal">
+            <i class="las la-times"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="page-title-container d-flex">
+                <h1 class="mb-0 pb-0 display-4">Filters</h1>
+            </div>
+            <div class="row">
+                <div class="col filter-body">
+                    @foreach (var property in _filters)
+                    {
+                        <FilterElement Property="property" />
+                    }
+                </div>
+            </div>
+    </div>
+</div>

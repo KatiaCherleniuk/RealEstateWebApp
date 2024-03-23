@@ -1,0 +1,56 @@
+﻿@using RealEstateWebApp.UI.Components.ModalComponent.Service
+@using System.IO
+@using RealEstateWebApp.Business
+@using RealEstateWebApp.Models.Files
+@using RealEstateWebApp.UI.Components.ToastComponent.Services
+@using RealEstateWebApp.UI.Services
+
+<div>
+   <div class="card">
+       <div class="card-body">
+            <div class="dropzone dz-clickable position-relative ">
+                <label class="dz-default dz-message cursor-pointer text-center">
+                    <span class="d-block display-3"><i class="las la-paperclip"></i></span>
+                    <span class="title d-block">@Localizer["Drop files here to upload"]</span>
+                    @if (UploadedFiles != null && UploadedFiles.Any())
+                    {
+                        <span class="d-block">(@UploadedFiles.Count(file => file.IsDeleted == false) @Localizer["files uploaded"])</span>
+                    }
+                    <InputFile OnChange="@OnChange" multiple title=""></InputFile>
+                   
+                </label>
+                
+            </div>
+        </div>
+   </div>
+    <Indicator Name="loading-preview">
+       @if (ShowFilesPreview && UploadedFiles != null && UploadedFiles.Any(file => !file.IsDeleted))
+       {
+           <div class="card mt-5">
+                <div class="card-body">
+            
+                    <div class="dropzone dropzone-columns row g-2 row-cols-1 row-cols-md-4 row-cols-xl-6 border-0 p-0 dz-clickable dz-started">
+                        @foreach (var file in UploadedFiles.Where(file => file.IsDeleted == false))
+                        {
+                            <div class="dz-preview col border-0 h-auto me-0 dz-processing dz-image-preview dz-error dz-complete">
+                                <div class="d-flex flex-column border rounded-md">
+                                    <div class="p-0 position-relative image-container w-100">
+                                        <div class="preview-container rounded-0 rounded-md-top">
+                                            <img class="img-thumbnail border-0 rounded-0 rounded-md-top sh-18" src="@GetPhotoUrl(file)" />
+                                        </div>
+                                    </div>
+                                    <div class="ps-3 pt-3 pe-2 pb-1 dz-details position-relative w-100">
+                                        <div><span data-dz-name="">@file.FileName</span></div>
+                                    </div>
+                                    <button class="remove btn btn-icon btn-icon-only" @onclick="@(()=>RemoveItem(file))"><i class="las la-trash"></i></button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+               </div>  
+           </div>
+       }
+    </Indicator>
+</div>
+

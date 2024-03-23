@@ -1,0 +1,93 @@
+﻿@using RealEstateWebApp.Models.UserSettings
+@using RealEstateWebApp.Models.Property
+@using RealEstateWebApp.UI.Components.Table
+
+
+<div class="col">
+
+    @* <div class="page-title-container">
+        <div class="row">
+            <!-- Title Start -->
+            <div class="col-12 col-md-7">
+                <h1 class="mb-0 pb-0 display-4">@_category?.Title</h1>
+            </div>
+            <!-- Title End -->
+
+            <!-- Top Buttons Start -->
+            <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
+                <!-- Add New Button Start -->
+                <a class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto" href="@(CategoryId == 0 ? "/record/new" : $"/category/{CategoryId}/record/new")" role="button">
+                    <i class="las la-plus"></i>
+                    <span>Add New</span>
+                </a>
+                <!-- Add New Button End -->
+                <PropertiesSettings CategoryId="CategoryId"/>
+            </div>
+            <!-- Top Buttons End -->
+        </div>
+    </div> *@
+
+    <div class="card">
+        <div class="card-body">
+            <Indicator Name="Record-properties" CssClass="table-scroll">
+                <table class="table responsive nowrap table-hover table sortable-table">
+                    <thead>
+                    <tr>
+                        @foreach (var property in _properties)
+                        {
+                            <th scope="col" onclick="@(() => DoOrderByProperty(property))">
+                                @property.Title
+                                   
+                            </th>
+                        }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (_totalRecords == 0 && !_areRecordsLoadingInProgress)
+                    {
+                        <tr>
+                            <td colspan="100%">No records found</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var record in _records)
+                        {
+                            <tr @onclick="@(async() => await OnRowClick.InvokeAsync(record.Id))" class=@(OnRowClick.HasDelegate ? "cursor-pointer":"")>
+
+                                @foreach (var property in _properties)
+                                {
+                                    <td>
+                                        @{
+                                            if (property.Type == PropertyType.ListMultiple)
+                                            {
+                                                foreach (var propertyValue in record.GetValueList(property))
+                                                {
+                                                        <span class="badge bg-outline-primary">@propertyValue.Title</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @record.GetValue(property)
+                                            }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                        if (_areRecordsLoadingInProgress)
+                        {
+                            <tr>
+                                <td colspan="100%">
+                                    <DefaultLoader/>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </Indicator>
+            <Pagination TotalSteps="@_paginatioStepsSize" StepsSize="3" OnStepClick="HandleStepClick"></Pagination>
+        </div>
+    </div>
+</div>

@@ -24,7 +24,13 @@ namespace RealEstateWebApp.UI.Controllers
 
             if (string.IsNullOrWhiteSpace(returnUrl))
                 returnUrl = "";
+
+            var user = await _userService.GetUserByLogin(login);
+            if(user.RoleId == 1)
+                return Redirect("/" + returnUrl);
+
             return LocalRedirect("/" + returnUrl);
+            //"/admin/dashboard"
         }
 
         public async Task<IActionResult> Logout()

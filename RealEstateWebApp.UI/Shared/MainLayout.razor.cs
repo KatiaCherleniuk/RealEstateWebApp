@@ -13,7 +13,7 @@ namespace RealEstateWebApp.UI.Shared
         protected async override Task OnInitializedAsync()
         {
             var user = (await AuthStat).User;
-            if(!user.Identity.IsAuthenticated)
+            if (!user.Identity.IsAuthenticated)
             {
                 var url = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
                 NavigationManager.NavigateTo($"/login", true);

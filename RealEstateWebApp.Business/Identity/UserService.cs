@@ -39,7 +39,7 @@ namespace RealEstateWebApp.Business.Identity
             return await _signInManager.CheckPasswordSignInAsync(user, password, true);
         }
 
-        private async Task<ApplicationUser> GetUserByLogin(string login)
+        public async Task<ApplicationUser> GetUserByLogin(string login)
         {
             if (string.IsNullOrWhiteSpace(login))
                 return null;

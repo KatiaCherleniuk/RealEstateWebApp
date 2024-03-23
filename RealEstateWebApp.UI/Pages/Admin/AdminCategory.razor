@@ -1,0 +1,9 @@
+﻿@page "/admin/category/{CategoryId:int}/{*Filter}"
+@using RealEstateWebApp.UI.Pages.Admin
+@using RealEstateWebApp.UI.Components.Filter
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="row">
+    <FilterBlock CategoryId="CategoryId" Filter="@Filter"></FilterBlock> 
+    <RecordsAsTable CategoryId="CategoryId" OnRowClick="NavigateToDetails"/>
+</div>

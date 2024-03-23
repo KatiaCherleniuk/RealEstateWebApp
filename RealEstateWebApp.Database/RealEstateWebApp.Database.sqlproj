@@ -60,6 +60,11 @@
     <Folder Include="StoredProcedures" />
     <Folder Include="StoredProcedures\Users" />
     <Folder Include="StoredProcedures\Roles" />
+    <Folder Include="StoredProcedures\Categories" />
+    <Folder Include="StoredProcedures\Properties" />
+    <Folder Include="StoredProcedures\Records" />
+    <Folder Include="StoredProcedures\PropertyValues" />
+    <Folder Include="StoredProcedures\RecordPropertyValues" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Roles.sql" />
@@ -86,5 +91,21 @@
     <Build Include="StoredProcedures\Roles\sp_Roles_GetByNormalizedName.sql" />
     <Build Include="StoredProcedures\Roles\sp_Roles_Insert.sql" />
     <Build Include="StoredProcedures\Roles\sp_Roles_Update.sql" />
+    <Build Include="StoredProcedures\Categories\sp_Categories_Delete.sql" />
+    <Build Include="StoredProcedures\Categories\sp_Categories_GetAllTitleOnly.sql" />
+    <Build Include="StoredProcedures\Categories\sp_Categories_GetAllWithRecordsCount.sql" />
+    <Build Include="StoredProcedures\Categories\sp_Categories_GetOneTitleOnly.sql" />
+    <Build Include="StoredProcedures\Categories\sp_Categories_Insert.sql" />
+    <Build Include="StoredProcedures\Categories\sp_Categories_Update.sql" />
+    <Build Include="StoredProcedures\Properties\sp_Properties_GetWithValuesByCategory.sql" />
+    <Build Include="StoredProcedures\Records\sp_Records_GetRecordForViewSimplifiedByIdList.sql" />
+    <Build Include="utIntTable.sql" />
+    <Build Include="StoredProcedures\PropertyValues\sp_PropertyValues_GetAllTitleOnly.sql" />
+    <Build Include="StoredProcedures\RecordPropertyValues\sp_RecordPropertyValues_GetRecordForViewSimplifiedByIdList.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
 </Project>

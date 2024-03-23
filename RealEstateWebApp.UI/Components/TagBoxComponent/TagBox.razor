@@ -1,0 +1,40 @@
+﻿@typeparam TValue
+<div class="btn-group w-100 mb-1">
+    <button
+        class="form-control w-100 dropdown-toggle dropdown-select tag-box"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true" disabled="@Disabled"
+        aria-expanded="false">
+        @if (_value != null)
+        {
+            foreach (var item in _value)
+            {
+                <div class="tag-box__inside-item" style="border-color: @GetColor(item)">
+                    <span>@GetName(item)</span><i class="las la-times item-remove" @onclick="() => Remove(item)" @onclick:stopPropagation="true" @onclick:preventDefault="true"></i>
+                </div>
+            }
+        }
+        else
+        {
+            <div  class="tag-box__inside-item"> @_text   </div>
+        }
+
+        @if (IsRemoveAllAllowed && _value != null && _value.Count > 0)
+        {
+            <i class="lar la-times-circle remove-selection" @onclick="RemoveAll" @onclick:stopPropagation="true" @onclick:preventDefault="true"></i>
+        }
+    </button>
+
+    <div class="dropdown-menu w-100">
+        @if (IsAddAllAllowed)
+        {
+            <span class="dropdown-item tag-item add-all" @onclick="AddAll">
+                <i class="las la-plus"></i> Add all
+            </span>
+        }
+        <CascadingValue name="TagBox" Value="@this">
+            @ChildContent
+        </CascadingValue>
+    </div>
+</div>
