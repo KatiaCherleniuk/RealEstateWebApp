@@ -27,7 +27,7 @@ namespace RealEstateWebApp.UI.Controllers
 
             var user = await _userService.GetUserByLogin(login);
             if(user.RoleId == 1)
-                return Redirect("/" + returnUrl);
+                return Redirect("/admin/dashboard" + returnUrl);
 
             return LocalRedirect("/" + returnUrl);
             //"/admin/dashboard"

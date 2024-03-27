@@ -99,6 +99,7 @@ namespace RealEstateWebApp.Business.Identity
         public Task<IdentityResult> Create(UserCreateModel user, string password)
         {
             user.EmailConfirmed = true;
+            user.CreatedAt = DateTime.UtcNow.Date;
             //todo change this
             return _userManager.CreateAsync(user, password);
         }

@@ -12,5 +12,6 @@
     [LockoutEnabled] BIT NOT NULL, 
     [AccessFailedCount] INT NOT NULL, 
     [IsBlocked] BIT NOT NULL, 
+    [CreatedAt] DATE NOT NULL DEFAULT GETDATE(),
     CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleId]) REFERENCES [Roles]([Id])
 )

@@ -22,7 +22,7 @@ namespace RealEstateWebApp.DataAccess.Repositories.Records
             _sqlBuilder = new SqlFilterBuilder(sqlFilterBuilderLogger);
         }
 
-        public Task<bool> Create(RecordEditModel recordModel)
+        public Task<bool> Create(RecordSQLModel recordModel)
         {
             return InsertWithIdAsync(recordModel);
         }
@@ -32,12 +32,12 @@ namespace RealEstateWebApp.DataAccess.Repositories.Records
             return DeleteByIdAsync(recordId);
         }
 
-        public Task<RecordEditModel> GetRecordForEdit(int recordId)
+        public Task<RecordSQLModel> GetRecordForEdit(int recordId)
         {
-            return GetByIdAsync<int, RecordEditModel>(recordId);
+            return GetByIdAsync<int, RecordSQLModel>(recordId);
         }
 
-        public Task<bool> Update(RecordEditModel recordModel)
+        public Task<bool> Update(RecordSQLModel recordModel)
         {
             return UpdateAsync(recordModel);
         }

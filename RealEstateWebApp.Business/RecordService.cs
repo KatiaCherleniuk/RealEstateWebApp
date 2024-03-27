@@ -10,6 +10,7 @@ using RealEstateWebApp.Models.RecordValue;
 using RealEstateWebApp.Models.RecordViewModels;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using RealEstateWebApp.Models.Record;
 
 namespace RealEstateWebApp.Business
 {
@@ -46,7 +47,7 @@ namespace RealEstateWebApp.Business
             var recordTask = _recordRepository.GetRecordForEdit(recordId);
 
             await Task.WhenAll(valuesTask, recordTask);
-            var res = new RecordEditViewModel(recordTask.Result)
+            var res = new RecordEditViewModel(recordTask.Result.ToBasicModel())
             {
                 Values = valuesTask.Result.ToList()
             };
@@ -56,7 +57,7 @@ namespace RealEstateWebApp.Business
         
         public async Task Create(RecordEditViewModel recordModel)
         {
-            await _recordRepository.Create(recordModel);
+            await _recordRepository.Create(new RecordSQLModel(recordModel));
             var tasks = new List<Task>();
             foreach (var value in recordModel.Values)
             {
@@ -70,7 +71,7 @@ namespace RealEstateWebApp.Business
 
         public async Task Update(RecordEditViewModel recordModel)
         {
-            await _recordRepository.Update(recordModel);
+            await _recordRepository.Update(new RecordSQLModel(recordModel));
             var tasks = new List<Task>();
             foreach (var value in recordModel.Values)
             {

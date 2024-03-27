@@ -23,7 +23,7 @@ namespace RealEstateWebApp.Models.RecordViewModels
                 PropertyType.Int => value.ValueNumber?.ToString() ?? "",
                 PropertyType.Float => value.ValueNumber?.ToString("F2") ?? "",
                 PropertyType.ListSingle => property.Values?.FirstOrDefault(v => v.Id == value.ValueId)?.Title ?? "",
-                PropertyType.Address => value.ValueAddress.DisplayName,
+                //PropertyType.Address => value.ValueAddress.DisplayName,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

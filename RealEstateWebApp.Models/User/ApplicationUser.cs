@@ -16,5 +16,6 @@ namespace RealEstateWebApp.Models.User
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount  { get; set; }
         public bool IsBlocked { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

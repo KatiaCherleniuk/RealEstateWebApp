@@ -65,6 +65,7 @@
     <Folder Include="StoredProcedures\Records" />
     <Folder Include="StoredProcedures\PropertyValues" />
     <Folder Include="StoredProcedures\RecordPropertyValues" />
+    <Folder Include="StoredProcedures\Stats" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Roles.sql" />
@@ -102,6 +103,11 @@
     <Build Include="utIntTable.sql" />
     <Build Include="StoredProcedures\PropertyValues\sp_PropertyValues_GetAllTitleOnly.sql" />
     <Build Include="StoredProcedures\RecordPropertyValues\sp_RecordPropertyValues_GetRecordForViewSimplifiedByIdList.sql" />
+    <Build Include="Tables\RecordStatusesHistory.sql" />
+    <Build Include="StoredProcedures\Stats\sp_Stats_GetRecordsCountByStatuses.sql" />
+    <Build Include="StoredProcedures\Stats\sp_Stats_GetUsersRegisteredAfterDate.sql" />
+    <Build Include="StoredProcedures\Stats\sp_Stats_GetRecordsByCategories.sql" />
+    <Build Include="StoredProcedures\Stats\sp_Stats_GetAveragePriceByCategory.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

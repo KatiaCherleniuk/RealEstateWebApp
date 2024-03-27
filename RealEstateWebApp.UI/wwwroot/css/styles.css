@@ -3274,8 +3274,13 @@ html[data-color='light-pink'] {
 * Bootstrap background utilities and additional ones.
 *
 */
+
+.bg-gradient-light{
+
+}
 .bg-primary {
-  background-color: var(--primary) !important; }
+    background-color: var(--primary) !important;
+}
 
 .bg-secondary {
   background-color: var(--secondary) !important; }

@@ -1,5 +1,235 @@
 ﻿@page "/admin/dashboard"
+@using RealEstateWebApp.Models.Record
 @attribute [Authorize(Roles = "Admin")]
 
 
-<p>Hello ADMIN!</p>
+@*<div class="row g-2">
+    @foreach (var topCard in recordsByStatus)
+    {
+       
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card sh-11 hover-scale-up cursor-pointer">
+                <div class="h-100 row g-0 card-body align-items-center py-3">
+                    <div class="col-auto pe-3">
+                        <div class="bg-gradient-primary sh-5 sw-5 rounded-xl d-flex justify-content-center align-items-center">
+                                @if (topCard.Status == (int)RecordStatusType.Active)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                }
+                                else if(topCard.Status == RecordStatusType.Paused)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="10" y1="15" x2="10" y2="9"></line><line x1="14" y1="15" x2="14" y2="9"></line>
+                                        </svg>
+                                    <path d="M16 5L7.7051 14.2166C7.32183 14.6424 6.65982 14.6598 6.2547 14.2547L3 11"></path>
+                                }
+                                else if (topCard.Status == RecordStatusType.Closed)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-check text-white">
+                                        <path d="M16 5L7.7051 14.2166C7.32183 14.6424 6.65982 14.6598 6.2547 14.2547L3 11"></path>
+                                    </svg>
+                                }
+                                else
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    <path d="M16 5L7.7051 14.2166C7.32183 14.6424 6.65982 14.6598 6.2547 14.2547L3 11"></path>
+                                }
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row gx-2 d-flex align-content-center">
+                            <div class="col-12 col-xl d-flex">
+                                <div class="d-flex align-items-center lh-1-25">@((RecordStatusType)topCard.Status)</div>
+                            </div>
+                            <div class="col-12 col-xl-auto">
+                                <div class="cta-2 text-primary">@topCard.RecordCount</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+@* </div> *@
+
+
+<div class="row">
+    <div class="col-12 col-xl-9">
+        <div class="mb-5" data-title="Fancy Charts" data-intro="Some charts over here!" data-step="1">
+            <h2 class="small-title">Sales &amp; Stocks</h2>
+            <div class="card mb-2 h-auto">
+                <div class="card-body">
+                    <div class="row g-0 h-100 chart-container" style="opacity: 1;">
+                        <!-- Contents for below are provided from js -->
+                        <div class="col-12 d-flex flex-column justify-content-between custom-tooltip pe-0 pe-sm-4">
+                            @* <p class="heading title mb-1">Sales</p> *@
+                            <div id="container" style="width:100%; height:315px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+
+    <div class="col-12 col-xl-3 mt-4">
+        @foreach (var topCard in recordsByStatus)
+        {
+
+            @* <div class="col-12"> *@
+                <div class="card sh-11 hover-scale-up cursor-pointer mt-2">
+                    <div class="h-100 row g-0 card-body align-items-center py-3">
+                        <div class="col-auto pe-3">
+                            <div class="bg-gradient-primary sh-5 sw-5 rounded-xl d-flex justify-content-center align-items-center">
+                                @if (topCard.Status == (int)RecordStatusType.Active)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                }
+                                else if (topCard.Status == RecordStatusType.Paused)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="10" y1="15" x2="10" y2="9"></line>
+                                        <line x1="14" y1="15" x2="14" y2="9"></line>
+                                    </svg>
+                                    <path d="M16 5L7.7051 14.2166C7.32183 14.6424 6.65982 14.6598 6.2547 14.2547L3 11"></path>
+                                }
+                                else if (topCard.Status == RecordStatusType.Closed)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-check text-white">
+                                        <path d="M16 5L7.7051 14.2166C7.32183 14.6424 6.65982 14.6598 6.2547 14.2547L3 11"></path>
+                                    </svg>
+                                }
+                                else
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                    <path d="M16 5L7.7051 14.2166C7.32183 14.6424 6.65982 14.6598 6.2547 14.2547L3 11"></path>
+                                }
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row gx-2 d-flex align-content-center">
+                                <div class="col-12 col-xl d-flex">
+                                    <div class="d-flex align-items-center lh-1-25">@((RecordStatusType)topCard.Status)</div>
+                                </div>
+                                <div class="col-12 col-xl-auto">
+                                    <div class="cta-2 text-primary">@topCard.RecordCount</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @* </div> *@
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 col-xl-4">
+        <div class="mb-5" data-title="Fancy Charts" data-intro="Some charts over here!" data-step="1">
+            <h2 class="small-title">Sales &amp; Stocks</h2>
+            <div class="card mb-2 h-auto">
+                <div class="card-body">
+                    <div class="row g-0 h-100 chart-container" style="opacity: 1;">
+                        <!-- Contents for below are provided from js -->
+                        <div class="col-12 d-flex flex-column justify-content-between custom-tooltip pe-0 pe-sm-4">
+                            @* <p class="heading title mb-1">Sales</p> *@
+                            <div id="container3" style="width:100%; height:275px;"></div>
+                        </div>
+                        <div class="col-12 col-sm sh-17">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-xl-5">
+        <div class="mb-5" data-title="Fancy Charts" data-intro="Some charts over here!" data-step="1">
+            <h2 class="small-title">Sales &amp; Stocks</h2>
+            <div class="card mb-2 h-auto">
+                <div class="card-body">
+                    <div class="row g-0 h-100 chart-container" style="opacity: 1;">
+                        <!-- Contents for below are provided from js -->
+                        <div class="col-12 d-flex flex-column justify-content-between custom-tooltip pe-0 pe-sm-4">
+                            @* <p class="heading title mb-1">Sales</p> *@
+                            <div id="container2" style="width:100%; height:300px;"></div>
+                        </div>
+                        <div class="col-12 col-sm sh-17">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-12 col-xl-6">
+        <!-- Sales & Stocks Charts Start -->
+        <div class="mb-5" data-title="Fancy Charts" data-intro="Some charts over here!" data-step="1">
+            <h2 class="small-title">Sales &amp; Stocks</h2>
+            <div class="card mb-2 h-auto">
+                <div class="card-body">
+                    <div class="row g-0 h-100 chart-container" style="opacity: 1;">
+                        <!-- Contents for below are provided from js -->
+                        <div class="col-12 d-flex flex-column justify-content-between custom-tooltip pe-0 pe-sm-4">
+                            <p class="heading title mb-1">Sales</p>
+                            <div id="container" style="width:100%; height:400px;"></div>
+                        </div>
+                        <div class="col-12 col-sm sh-17">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sales & Stocks Charts End -->
+    </div>
+
+    <div class="col-12 col-xl-3">
+        <!-- Sales & Stocks Charts Start -->
+        <div class="mb-5" data-title="Fancy Charts" data-intro="Some charts over here!" data-step="1">
+            <h2 class="small-title">Sales &amp; Stocks</h2>
+            <div class="card mb-2 h-auto">
+                <div class="card-body">
+                    <div class="row g-0 h-100 chart-container" style="opacity: 1;">
+                        <!-- Contents for below are provided from js -->
+                        <div class="col-12 d-flex flex-column justify-content-between custom-tooltip pe-0 pe-sm-4">
+                            <p class="heading title mb-1">Sales</p>
+                            <div id="container2" style="width:100%; height:400px;"></div>
+                        </div>
+                        <div class="col-12 col-sm sh-17">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sales & Stocks Charts End -->
+    </div>
+    <div class="col-12 col-xl-3">
+        <!-- Sales & Stocks Charts Start -->
+        <div class="mb-5" data-title="Fancy Charts" data-intro="Some charts over here!" data-step="1">
+            <h2 class="small-title">Sales &amp; Stocks</h2>
+            <div class="card mb-2 h-auto">
+                <div class="card-body">
+                    <div class="row g-0 h-100 chart-container" style="opacity: 1;">
+                        <!-- Contents for below are provided from js -->
+                        <div class="col-12 d-flex flex-column justify-content-between custom-tooltip pe-0 pe-sm-4">
+                            <p class="heading title mb-1">Sales</p>
+                            <div id="container3" style="width:100%; height:400px;"></div>
+                        </div>
+                        <div class="col-12 col-sm sh-17">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sales & Stocks Charts End -->
+    </div>
+</div>*@

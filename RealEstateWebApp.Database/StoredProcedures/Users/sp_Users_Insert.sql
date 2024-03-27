@@ -10,10 +10,11 @@
     @LockoutEnabled BIT,
     @LockoutEnd DATETIME,
     @AccessFailedCount INT,
-    @IsBlocked BIT
+    @IsBlocked BIT,
+    @CreatedAt DATE
 AS
-    INSERT INTO Users (UserName, NormalizedUserName, Email, NormalizedEmail, EmailConfirmed, PasswordHash, RoleId, AccessFailedCount, LockoutEnd, LockoutEnabled, IsBlocked) 
-    VALUES (@UserName, @NormalizedUserName, @Email, @NormalizedEmail, @EmailConfirmed, @PasswordHash, @RoleId, @AccessFailedCount, @LockoutEnd, @LockoutEnabled, @IsBlocked);
+    INSERT INTO Users (UserName, NormalizedUserName, Email, NormalizedEmail, EmailConfirmed, PasswordHash, RoleId, AccessFailedCount, LockoutEnd, LockoutEnabled, IsBlocked, CreatedAt) 
+    VALUES (@UserName, @NormalizedUserName, @Email, @NormalizedEmail, @EmailConfirmed, @PasswordHash, @RoleId, @AccessFailedCount, @LockoutEnd, @LockoutEnabled, @IsBlocked, @CreatedAt);
 
     SELECT @Id = SCOPE_IDENTITY();
 RETURN 0

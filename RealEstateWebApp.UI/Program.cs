@@ -13,6 +13,7 @@ using RealEstateWebApp.DataAccess.Repositories.Properties;
 using RealEstateWebApp.DataAccess.Repositories.Records;
 using RealEstateWebApp.DataAccess.Repositories.UserSettings;
 using RealEstateWebApp.UI.Components.ToastComponent;
+using RealEstateWebApp.DataAccess.Repositories.Stats;
 
 
 
@@ -91,6 +92,7 @@ void AddBusiness(IServiceCollection services)
     services.AddScoped<UserSettingsService>();
     services.AddScoped<RecordFieldsUserSettingsService>();*/
     services.AddSingleton<FileService>();
+    services.AddSingleton<StatisticService>();
     services.AddSingleton<CategoryService>();
     services.AddSingleton<PropertyService>();
     services.AddSingleton<PropertyValueService>();
@@ -108,6 +110,7 @@ void AddDataAccess(IServiceCollection services)
     services.AddSingleton<IUserRepository, UserRepository>();
     services.AddSingleton<IFileRepository, FileRepository>();
     services.AddSingleton<IUserSettingsRepository, UserSettingsRepository>();
+    services.AddSingleton<IStatisticRepository, StatisticRepository>();
 }
 
 void AddIdentity(IServiceCollection services)

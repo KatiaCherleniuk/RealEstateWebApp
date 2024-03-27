@@ -39,8 +39,8 @@ namespace RealEstateWebApp.Models.RecordValue
                 ValueId = ValueId,
                 ValueNumber = ValueNumber,
                 ValueString = ValueString,
-                ValueList = valueList,
-                ValueAddress = addressAsModel
+                ValueList = valueList
+                //ValueAddress = addressAsModel
             };
         }
         
@@ -54,7 +54,7 @@ namespace RealEstateWebApp.Models.RecordValue
             ValueNumber = basicModel.ValueNumber;
             ValueString = basicModel.ValueString;
             ValueList = basicModel.ValueList == null ? null : string.Join(',', basicModel.ValueList);
-            ValueAddress = JsonConvert.SerializeObject(basicModel.ValueAddress);
+            //ValueAddress = JsonConvert.SerializeObject(basicModel.ValueAddress);
         }
         
     }

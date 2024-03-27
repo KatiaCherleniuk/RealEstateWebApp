@@ -11,6 +11,6 @@ namespace RealEstateWebApp.Models.RecordValue
         public string? ValueString { get; set; }
         public int? ValueId { get; set; }
         public List<int> ValueList { get; set; }
-        public AddressModel ValueAddress { get; set; }
+        //public AddressModel ValueAddress { get; set; }
     }
 }
