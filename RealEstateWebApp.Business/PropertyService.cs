@@ -60,12 +60,12 @@ namespace RealEstateWebApp.Business
             await Task.WhenAll(tasks);
         }
 
-        public Task<IEnumerable<PropertyWithValuesModel>> GetFiltersForCategory(int categoryId)
+        public Task<List<PropertyWithValuesModel>> GetFiltersForCategory(int categoryId)
         {
             return GetAllForCategory(categoryId);
         }
 
-        public async Task<IEnumerable<PropertyWithValuesModel>> GetAllForCategory(int categoryId)
+        public async Task<List<PropertyWithValuesModel>> GetAllForCategory(int categoryId)
         {
             var flatItems = await _propertyRepository.GetWithValuesByCategory(categoryId);
             var res = flatItems

@@ -9,7 +9,7 @@ namespace RealEstateWebApp.Models.Stats
     public class StatsAveragePrices
     {
         public string Title { get; set; }
-        public DateTime Period { get; set; }
+        public DateTime PeriodStart { get; set; }
         public int AveragePrice { get; set; }
     }
 }

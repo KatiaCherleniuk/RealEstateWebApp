@@ -7,7 +7,7 @@
     function groupDataByTitle(data) {
         var groupedData = {};
         data.forEach(function (item) {
-            var dateOnly = item.period.split('T')[0];
+            var dateOnly = item.periodStart.split('T')[0];
 
             if (!groupedData[item.title]) {
                 groupedData[item.title] = {

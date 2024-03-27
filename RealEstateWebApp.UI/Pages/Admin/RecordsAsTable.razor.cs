@@ -8,6 +8,8 @@ using RealEstateWebApp.Models.UserSettings;
 using RealEstateWebApp.Models;
 using RealEstateWebApp.UI.Components.LoadIndicatorLiteComponent;
 using RealEstateWebApp.UI.Services;
+using Microsoft.Extensions.Localization;
+using RealEstateWebApp.UI.Resources;
 
 namespace RealEstateWebApp.UI.Pages.Admin
 {
@@ -16,6 +18,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
         [Parameter] public int CategoryId { get; set; }
         [Parameter] public EventCallback<int> OnRowClick { get; set; }
         [Inject] public ILogger<RecordsAsTable> Logger { get; set; }
+        [Inject] public IStringLocalizer<Resource> Localizer { get; set; }
         [Inject] public IIndicatorService IndicatorService { get; set; }
         [Inject] public FiltersWatcher FiltersWatcher { get; set; }
         [Inject] public RecordService RecordService { get; set; }
@@ -25,7 +28,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
         private bool _areRecordsLoadingInProgress;
         private int _totalRecords;
         private List<RecordSimplifiedViewModel> _records;
-        private List<PropertyWithValuesModel> _properties;
+        private List<PropertyWithValuesModel> _properties = new();
         private DotNetObjectReference<RecordsAsTable> _objRef;
 
         private TitleAndIdModel _category;
@@ -35,9 +38,6 @@ namespace RealEstateWebApp.UI.Pages.Admin
         protected override async Task OnInitializedAsync()
         {
             FiltersWatcher.SetCategoryId(CategoryId);
-            _properties = new List<PropertyWithValuesModel>();
-            var a = await PropertyService.GetAllForCategory(CategoryId);
-            _properties = a.ToList();
             _records = new List<RecordSimplifiedViewModel>();
             ClearRecords();
             FiltersWatcher.FiltersChanged += OnFiltersChanged;
@@ -58,6 +58,8 @@ namespace RealEstateWebApp.UI.Pages.Admin
             {
                 _areRecordsLoadingInProgress = true;
                 await InvokeAsync(StateHasChanged);
+                _properties = await PropertyService.GetAllForCategory(CategoryId);
+
                 var responseModel = await RecordService.GetRecordsByFilterRequest(FiltersWatcher.FilterModel);
                 _records = responseModel.Records.ToList();
                 _totalRecords = responseModel.TotalItems;

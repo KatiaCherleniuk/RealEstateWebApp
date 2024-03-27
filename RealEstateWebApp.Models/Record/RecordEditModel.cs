@@ -9,5 +9,6 @@ namespace RealEstateWebApp.Models.Record
         public double Price { get; set; }
         public double Square { get; set; }
         public AddressModel Address { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -1,8 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Components;
-using RealEstateWebApp.UI.Components.ModalComponent.Service;
 
-namespace RealEstateWebApp.UI.ModalComponent.Service
+namespace RealEstateWebApp.UI.Components.ModalComponent.Service
 {
     public interface IModalService
     {

@@ -18,6 +18,7 @@ namespace RealEstateWebApp.Models.Record
         public double Price { get; set; }
         public double Square { get; set; }
         public string Address { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public RecordEditModel ToBasicModel()
         {
@@ -31,7 +32,8 @@ namespace RealEstateWebApp.Models.Record
                 Price = Price,
                 Square = Square,
                 Address = addressAsModel,
-                CategoryId = CategoryId
+                CategoryId = CategoryId,
+                CreatedAt = CreatedAt
             };
         }
         public RecordSQLModel() { }
@@ -43,6 +45,7 @@ namespace RealEstateWebApp.Models.Record
             Square = basicModel.Square;
             Address = JsonConvert.SerializeObject(basicModel.Address);
             CategoryId = basicModel.CategoryId;
+            CreatedAt = basicModel.CreatedAt;
         }
     }
 }

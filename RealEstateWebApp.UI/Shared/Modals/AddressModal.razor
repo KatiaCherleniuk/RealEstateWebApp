@@ -1,0 +1,22 @@
+﻿
+<div class="d-flex flex-column">
+    <div id="map" class="w-100" style="height: 350px;"></div>
+    <div class="mt-4">
+        <h6>@Localizer["Input address manually"]</h6>
+        <div class="input-group">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" @bind="_address.IsEnteredManually" @oninput="ToggleMap">
+            </div>
+            <input id="manualAddressInput" type="text" class="form-control" disabled="@(!_address.IsEnteredManually)" @bind-value="_address.DisplayName">
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+    <button class="btn btn-outline-primary me-3" type="button" @onclick="Save">
+        @Localizer["Save"]
+    </button>
+    <button class="btn btn-primary" @onclick="Cancel">
+        @Localizer["Cancel"]
+    </button>
+</div>

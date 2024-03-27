@@ -14,6 +14,10 @@ namespace RealEstateWebApp.Models.RecordViewModels
         {
             Id = baseModel.Id;
             CategoryId = baseModel.CategoryId;
+            Price = baseModel.Price;
+            Square = baseModel.Square;
+            Address = baseModel.Address;
+            CreatedAt = baseModel.CreatedAt;
         }
     }
 }

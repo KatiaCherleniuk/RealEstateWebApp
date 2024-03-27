@@ -7331,7 +7331,8 @@ body.spinner #root {
     background: var(--foreground); }
 
 table.sortable-table thead th, table.sortable-table thead td {
-  cursor: pointer; }
+    white-space: nowrap;
+    cursor: pointer;}
   table.sortable-table thead th i, table.sortable-table thead td i {
     display: inline;
     margin-left: 3px; }

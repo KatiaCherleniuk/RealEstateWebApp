@@ -11,12 +11,9 @@ namespace RealEstateWebApp.UI.Pages.Admin
         [Parameter] public string Filter { get; set; }
 
         [Inject] private FiltersWatcher FiltersWatcher { get; set; }
-        [Inject] private CategoryService CategoryService { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
 
-        private TitleAndIdModel _category;
-
-        protected override async Task OnParametersSetAsync()
+        protected override void OnParametersSet()
         {
             FiltersWatcher.SetCategoryId(CategoryId);
         }

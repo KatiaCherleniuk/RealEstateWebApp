@@ -4,7 +4,6 @@ using System.Linq;
 using RealEstateWebApp.UI.Components.ModalComponent.Service;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
-using RealEstateWebApp.UI.ModalComponent.Service;
 
 namespace RealEstateWebApp.UI.Components.ModalComponent
 {

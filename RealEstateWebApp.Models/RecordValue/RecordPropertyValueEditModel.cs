@@ -14,7 +14,6 @@ namespace RealEstateWebApp.Models.RecordValue
         public string? ValueString { get; set; }
         public int? ValueId { get; set; }
         public string? ValueList { get; set; }
-        public string? ValueAddress { get; set; }
 
         public RecordPropertyValueBasicModel ToBasicModel()
         {
@@ -28,10 +27,7 @@ namespace RealEstateWebApp.Models.RecordValue
                         valueList.Add(v);
                 }
             }
-            AddressModel addressAsModel = null;
-            if (ValueAddress != null)
-                addressAsModel = JsonConvert.DeserializeObject<AddressModel>(ValueAddress);
-
+            
             return new RecordPropertyValueBasicModel()
             {
                 RecordId = RecordId,
@@ -40,7 +36,6 @@ namespace RealEstateWebApp.Models.RecordValue
                 ValueNumber = ValueNumber,
                 ValueString = ValueString,
                 ValueList = valueList
-                //ValueAddress = addressAsModel
             };
         }
         
@@ -54,7 +49,6 @@ namespace RealEstateWebApp.Models.RecordValue
             ValueNumber = basicModel.ValueNumber;
             ValueString = basicModel.ValueString;
             ValueList = basicModel.ValueList == null ? null : string.Join(',', basicModel.ValueList);
-            //ValueAddress = JsonConvert.SerializeObject(basicModel.ValueAddress);
         }
         
     }

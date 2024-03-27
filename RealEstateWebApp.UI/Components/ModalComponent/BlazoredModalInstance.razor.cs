@@ -1,5 +1,4 @@
 ﻿using System;
-using RealEstateWebApp.UI.ModalComponent.Service;
 using Microsoft.AspNetCore.Components;
 using RealEstateWebApp.UI.Components.ModalComponent;
 using RealEstateWebApp.UI.Components.ModalComponent.Service;

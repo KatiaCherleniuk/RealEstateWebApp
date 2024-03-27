@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using RealEstateWebApp.UI.ModalComponent.Service;
 
 namespace RealEstateWebApp.UI.Components.ModalComponent.Service
 {

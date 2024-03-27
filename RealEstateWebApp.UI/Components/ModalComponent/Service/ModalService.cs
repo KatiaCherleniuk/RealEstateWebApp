@@ -1,6 +1,5 @@
 using System;
 using Microsoft.AspNetCore.Components;
-using RealEstateWebApp.UI.ModalComponent.Service;
 
 namespace RealEstateWebApp.UI.Components.ModalComponent.Service
 {

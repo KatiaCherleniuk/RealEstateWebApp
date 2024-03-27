@@ -1,0 +1,30 @@
+﻿@if (string.IsNullOrEmpty(Text))
+{
+    @((MarkupString) TextHtml)
+}
+else
+{
+    @(Text)
+}
+<div class="d-flex justify-content-center mt-3">
+    <button class="btn btn-outline-primary me-3" type="button" @onclick="Yes">
+        @if (string.IsNullOrEmpty(YesBtnText))
+        {
+            <i class="fas fa-check"></i>
+        }
+        else
+        {
+            @YesBtnText
+        }
+    </button>
+    <button class="btn btn-primary" @onclick="No">
+        @if (string.IsNullOrEmpty(NoBtnText))
+        {
+            <i class="fas fa-times"></i>
+        }
+        else
+        {
+            @NoBtnText
+        }
+    </button>
+</div>

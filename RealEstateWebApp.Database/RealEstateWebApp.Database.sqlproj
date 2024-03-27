@@ -66,6 +66,7 @@
     <Folder Include="StoredProcedures\PropertyValues" />
     <Folder Include="StoredProcedures\RecordPropertyValues" />
     <Folder Include="StoredProcedures\Stats" />
+    <Folder Include="StoredProcedures\Files" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Roles.sql" />
@@ -108,6 +109,18 @@
     <Build Include="StoredProcedures\Stats\sp_Stats_GetUsersRegisteredAfterDate.sql" />
     <Build Include="StoredProcedures\Stats\sp_Stats_GetRecordsByCategories.sql" />
     <Build Include="StoredProcedures\Stats\sp_Stats_GetAveragePriceByCategory.sql" />
+    <Build Include="StoredProcedures\Records\sp_Records_Delete.sql" />
+    <Build Include="StoredProcedures\Records\sp_Records_GetById.sql" />
+    <Build Include="StoredProcedures\Records\sp_Records_Insert.sql" />
+    <Build Include="StoredProcedures\Records\sp_Records_Update.sql" />
+    <Build Include="StoredProcedures\RecordPropertyValues\sp_RecordPropertyValues_GetRecordValuesByRecordId.sql" />
+    <Build Include="StoredProcedures\RecordPropertyValues\sp_RecordPropertyValues_UpdateOrCreate.sql" />
+    <Build Include="StoredProcedures\PropertyValues\sp_PropertyValues_Insert.sql" />
+    <Build Include="StoredProcedures\PropertyValues\sp_PropertyValues_Update.sql" />
+    <Build Include="StoredProcedures\Files\sp_Files_Update.sql" />
+    <Build Include="StoredProcedures\Files\sp_Files_Insert.sql" />
+    <Build Include="StoredProcedures\Files\sp_Files_GetByRecordId.sql" />
+    <Build Include="StoredProcedures\Files\sp_Files_GetByIdAndRecordId.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

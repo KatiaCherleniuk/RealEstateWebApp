@@ -57,6 +57,7 @@ namespace RealEstateWebApp.Business
         
         public async Task Create(RecordEditViewModel recordModel)
         {
+            recordModel.CreatedAt = DateTime.Now;
             await _recordRepository.Create(new RecordSQLModel(recordModel));
             var tasks = new List<Task>();
             foreach (var value in recordModel.Values)
@@ -95,7 +96,7 @@ namespace RealEstateWebApp.Business
             {
                 TotalItems = recordIdList.Count(),
                 Records = recordsTask.Result.Select(r => {
-                        r.Values = valuesTask.Result.Where(v => v.RecordId == r.Id);;
+                        r.Values = valuesTask.Result.Where(v => v.RecordId == r.Id);
                         return r;
                     }
                 )

@@ -1,0 +1,170 @@
+﻿@page "/admin/record/new"
+@page "/admin/category/{CategoryId:int}/record/new"
+@page "/admin/record/{RecordId:int}/edit"
+
+@using RealEstateWebApp.Models.Property
+@using RealEstateWebApp.UI.Components.DropzoneComponent
+@using RealEstateWebApp.UI.Components.SelectComponent
+@using RealEstateWebApp.UI.Components.TagBoxComponent
+
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="row">
+    <div class="col">
+        <!-- Title Start -->
+        <section class="scroll-section" id="title">
+            <div class="page-title-container">
+                <h1 class="mb-0 pb-0 display-4">New product</h1>
+            </div>
+        </section>
+        <!-- Title End -->
+
+        <Indicator Name="record-edit-all">
+            <!-- Content Start -->
+            <section class="scroll-section">
+                <!-- Basic Start -->
+                <h2 class="small-title">General</h2>
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <DropdownSelect @bind-Value="_workingRecordModel.CategoryId" OnValueChanged="CategoryChanged" Disabled="_workingRecordModel.Id != 0">
+                                @foreach (var category in _categories)
+                                {
+                                    <SelectItem Value="category.Id">@category.Title</SelectItem>
+                                }
+                            </DropdownSelect>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="scroll-section">
+                <!-- Basic Start -->
+                <h2 class="small-title">Properties</h2>
+                <div class="card mb-5">
+                    <div class="card-body">
+                        @* <Indicator Name="record-edit-properties"> *@
+                            <div class="row">
+                                <!-- Mandatory properties Start -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Price</label>
+                                    <input type="text" class="form-control" @bind="@_workingRecordModel.Price" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Square</label>
+                                    <input type="text" class="form-control" @bind="@_workingRecordModel.Square" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Address</label>
+                                    <input type="text" class="form-control clickable" readonly @onclick="@(async () => await OpenMapModal(5))" value="@_workingRecordModel.Address?.DisplayName" />
+                                </div>
+
+                                <!-- Mandatory properties End -->
+
+                                @foreach (var property in _properties)
+                                {
+                                    <div class="col-md-6">
+                                        <label class="form-label">@property.Title</label>
+                                        
+                                        @{
+                                            var value = GetValue(property);
+                                            switch (property.Type)
+                                            {
+                                                case PropertyType.Text:
+                                                <input type="text" class="form-control" @bind-value="value.ValueString"/>
+                                                    break;
+                                                case PropertyType.Int:
+                                                <input type="text" class="form-control" @bind-value="value.ValueNumber"/>
+                                                    break;
+                                                case PropertyType.Float:
+                                                <input type="text" class="form-control" @bind-value="value.ValueNumber"/>
+                                                    break;
+                                                case PropertyType.ListSingle:
+                                                    <DropdownSelect @bind-Value="value.ValueId" IsRemoveAllAllowed="true">
+                                                        @foreach (var propertyValue in property.Values)
+                                                        {
+                                                            <SelectItem Value="@((int?)propertyValue.Id)">@propertyValue.Title</SelectItem>
+                                                        }
+                                                    </DropdownSelect>
+                                                    break;
+                                                case PropertyType.ListMultiple:
+                                                    <TagBox @bind-Value="value.ValueList" IsRemoveAllAllowed="true">
+                                                        @foreach (var propertyValue in property.Values)
+                                                        {
+                                                            <TagBoxItem Value="propertyValue.Id">@propertyValue.Title</TagBoxItem>
+                                                        }
+                                                    </TagBox>
+                                                    break;
+                                                case PropertyType.Address:
+                                                    <input type="text" class="form-control" value="HELLOOOO!!!!!!!" />
+                                                    break;
+                                                default:
+                                                    throw new ArgumentOutOfRangeException();
+                                            }
+                                        }
+                                        
+                                    </div>
+                                }
+                            </div>
+                        @* </Indicator> *@
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Images Start -->
+
+            <section class="scroll-section">
+                <!-- Basic Start -->
+                <h2 class="small-title">Images</h2>
+                <Dropzone @ref="_dropzoneComponent" ShowFilesPreview="true" UploadedFiles="_recordsFiles"> </Dropzone>
+            </section>
+
+            <!-- Images End -->
+        </Indicator>
+
+        <!-- Content End -->
+
+    </div>
+
+    <!-- Scrollspy Start -->
+    <div class="col-md-auto d-none d-lg-block" id="scrollSpyMenu">
+        <div class="d-flex justify-content-around flex-column align-items-center w-70">
+            <button class="btn btn-icon btn-icon-start btn-outline-success mb-3 w-100" type="button" @onclick="Save">
+                <i class="las la-save"></i>
+                <span>Save</span>
+            </button>
+            <button class="btn btn-icon btn-icon-start btn-outline-warning mb-3 w-100" type="button" @onclick="Discard">
+                <i class="las la-history"></i>
+                <span>Discard</span>
+            </button>
+            @if(RecordId != 0)
+            {
+                <button class="btn btn-icon btn-icon-start btn-outline-danger mb-3 w-100" type="button" @onclick="DeleteRecord">
+                    <i class="las la-trash"></i>
+                    <span>Delete</span>
+                </button>
+            }
+        </div>
+
+        @* <ul class="nav flex-column mt-5">
+            <li>
+                <a class="nav-link" href="#title">
+                    <i data-cs-icon="chevron-right"></i>
+                    <span>General</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="#basic">
+                    <i data-cs-icon="chevron-right"></i>
+                    <span>Properties</span>
+                </a>
+            </li>
+        </ul> *@
+    </div>
+    <!-- Scrollspy End -->
+
+</div>
+
