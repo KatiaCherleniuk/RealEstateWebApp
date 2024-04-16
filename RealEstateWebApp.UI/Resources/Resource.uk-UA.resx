@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Адреса</value>
+  </data>
   <data name="en-US" xml:space="preserve">
     <value>Англійська</value>
   </data>
+  <data name="is mandatory field. You should add it to each record" xml:space="preserve">
+    <value>- це обов'язкове поле. Вам буде необхідно додати його до кожного об'єкту нерухомості.</value>
+  </data>
   <data name="pl-PL" xml:space="preserve">
     <value>Польська</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Ціна</value>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>Площа</value>
   </data>
   <data name="uk-UA" xml:space="preserve">
     <value>Українська</value>

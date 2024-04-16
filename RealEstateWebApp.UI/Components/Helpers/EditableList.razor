@@ -1,0 +1,68 @@
+﻿@typeparam TItem
+
+<TwoColumnsPage Title="Title" LeftSubTitle="LeftSubTitle" RightSubTitle="RightSubTitle">
+    <LeftButtons>
+        <button class="btn btn-icon btn-icon-start btn-outline-primary mb-1" type="button" @onclick="OnAddItem">
+            <i class="las la-plus"></i>
+            <span>Add</span>
+        </button>
+    </LeftButtons>
+    <LeftBody>
+        <Indicator Name="settings-editable-list">
+            <table class="table responsive nowrap table-hover table">
+                <thead><tr>@TableHead</tr></thead>
+                <tbody>
+                    @if(MandatoryItems != null && MandatoryItems.Any())
+                    {
+                        @foreach (var item in MandatoryItems)
+                        {
+                            <tr>
+                                <td class="d-flex align-items-center">
+                                    <span class="w-90">@item.Name</span>
+                                    <span class="ml-auto">
+                                        <button type="button" style="height: 20px; width:20px; padding:5px 2px;" class="btn btn-sm btn-icon btn-icon-only btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                            <span class="font-weight-bold font-italic">i</span>
+                                        </button>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    @foreach (var item in _items)
+                    {
+                        <tr @onclick="() => SelectItem(item)" class="@(Logic.IsEqual(item, _selectedItem) ? "selected" : "")">
+                            @TableRow(item)
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </Indicator>
+    </LeftBody>
+    <RightButtons>
+        @if (!_editedItem.IsReadOnly)
+        {
+            <button class="btn btn-sm btn-icon btn-icon-only btn-outline-success" type="button" @onclick="OnSave">
+                <i class="las la-save"></i>
+            </button>
+            <button class="btn btn-sm btn-icon btn-icon-only btn-outline-warning" type="button" @onclick="OnDiscard">
+                <i class="las la-history"></i>
+            </button>
+        }
+        else
+        {
+            if (!_editedItem.IsCreate)
+            {
+                <button class="btn btn-sm btn-icon btn-icon-only btn-outline-secondary" type="button" @onclick="OnEdit">
+                    <i class="las la-pen"></i>
+                </button>
+                <button class="btn btn-sm btn-icon btn-icon-only btn-outline-danger" type="button" @onclick="OnDelete">
+                    <i class="las la-trash"></i>
+                </button>
+            }
+        }
+    </RightButtons>
+    <RightBody>
+        @EditForm(_editedItem)
+    </RightBody>
+
+</TwoColumnsPage>

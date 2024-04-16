@@ -37,9 +37,9 @@ namespace RealEstateWebApp.DataAccess.Repositories.Categories
             return GetManyAsync<TitleAndIdModel>("GetAllTitleOnly");
         }
 
-        public Task<TitleAndIdModel> GetOneTitleOnly(int categoryId)
+        public Task<CategoryEditModel> GetOneTitleOnly(int categoryId)
         {
-            return GetOneAsync<TitleAndIdModel>("GetOneTitleOnly", new {Id = categoryId});
+            return GetOneAsync<CategoryEditModel>("GetOneTitleOnly", new {Id = categoryId});
         }
     }
 }

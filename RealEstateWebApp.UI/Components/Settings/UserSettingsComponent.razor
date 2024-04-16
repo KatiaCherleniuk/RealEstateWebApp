@@ -1,0 +1,69 @@
+﻿@using RealEstateWebApp.UI.Components.Table
+<div class="row">
+    <div class="page-title-container">
+        <div class="row">
+            <!-- Title End -->
+            <!-- Top Buttons Start -->
+            <div class="d-flex align-items-start justify-content-end gap-4">
+                <div class="input-group w-30">
+                    <input type="text" class="form-control" @bind-value=@_filter>
+                    <button class="btn btn-outline-primary" type="button" @onclick="ReloadData">@Localizer["Search"]</button>
+                </div>
+                <a class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto" href="/admin/settings/category/new" role="button">
+                    <i class="las la-plus"></i>
+                    <span>Add New</span>
+                </a>
+            </div>
+            <!-- Top Buttons End -->
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <Indicator Name="users-settings" CssClass="table-scroll">
+                <table class="table responsive nowrap table-hover table sortable-table">
+                    <thead>
+                        <tr>
+                            <th>@Localizer["UserName"]</th>
+                            <th>@Localizer["Email"]</th>
+                            <th>@Localizer["Phone"]</th> 
+                            <th>@Localizer["IsBlocked"]</th>
+                            <th>@Localizer["Created at"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Users == null)
+                        {
+                            <tr>
+                                <td colspan="100%">@Localizer["No categories found"] </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var record in Users)
+                            {
+                                <tr @onclick="@(async() => await OnRowClick.InvokeAsync(record.Id))" class=@(OnRowClick.HasDelegate ? "cursor-pointer":"")>
+                                    <td>@record.UserName</td>
+                                    <td>@record.Email</td>
+                                    <td>@record.RoleName</td>
+                                    <td>
+
+                                        @if (record.IsBlocked)
+                                        {
+                                            <span class="badge bg-outline-danger">
+                                                @Localizer["Blocked"]
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>@record.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </Indicator>
+            <Pagination PaginationModel="@PaginationModel" OnStepClick="HandleStepClick"></Pagination>
+        </div>
+    </div>
+
+</div>

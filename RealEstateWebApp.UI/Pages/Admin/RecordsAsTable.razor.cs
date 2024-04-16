@@ -10,6 +10,8 @@ using RealEstateWebApp.UI.Components.LoadIndicatorLiteComponent;
 using RealEstateWebApp.UI.Services;
 using Microsoft.Extensions.Localization;
 using RealEstateWebApp.UI.Resources;
+using RealEstateWebApp.Models.Category;
+using RealEstateWebApp.UI.Components.Table;
 
 namespace RealEstateWebApp.UI.Pages.Admin
 {
@@ -24,6 +26,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
         [Inject] public RecordService RecordService { get; set; }
         [Inject] public CategoryService CategoryService { get; set; }
         [Inject] public PropertyService PropertyService { get; set; }
+        public PaginationModel PaginationModel { get; set; }
 
         private bool _areRecordsLoadingInProgress;
         private int _totalRecords;
@@ -31,9 +34,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
         private List<PropertyWithValuesModel> _properties = new();
         private DotNetObjectReference<RecordsAsTable> _objRef;
 
-        private TitleAndIdModel _category;
-
-        private int _paginatioStepsSize;
+        private CategoryEditModel _category;
 
         protected override async Task OnInitializedAsync()
         {
@@ -42,6 +43,11 @@ namespace RealEstateWebApp.UI.Pages.Admin
             ClearRecords();
             FiltersWatcher.FiltersChanged += OnFiltersChanged;
             _objRef = DotNetObjectReference.Create(this);
+            PaginationModel = new PaginationModel()
+            {
+                CurrentStep = 1,
+                PageSize = 8
+            };
         }
 
         private Task OnFiltersChanged()
@@ -63,7 +69,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
                 var responseModel = await RecordService.GetRecordsByFilterRequest(FiltersWatcher.FilterModel);
                 _records = responseModel.Records.ToList();
                 _totalRecords = responseModel.TotalItems;
-                _paginatioStepsSize = _totalRecords / FiltersWatcher.FilterModel.PageSize;
+                PaginationModel.TotalListSize = _totalRecords;
             }
             catch (Exception e)
             {

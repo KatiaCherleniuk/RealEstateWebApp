@@ -14,6 +14,7 @@ using RealEstateWebApp.DataAccess.Repositories.Records;
 using RealEstateWebApp.DataAccess.Repositories.UserSettings;
 using RealEstateWebApp.UI.Components.ToastComponent;
 using RealEstateWebApp.DataAccess.Repositories.Stats;
+using RealEstateWebApp.UI.Components.ToastComponent.Services;
 
 
 
@@ -64,10 +65,10 @@ app.Run();
 void AddUiServices(IServiceCollection services, Action<IndicatorOptions> optionsBuilder = null)
 {
     services.AddProgressIndicatorLite();
-    services.AddBlazorToast();
+    /*services.AddBlazorToast()*/
     services.AddBlazoredModal();
+    services.AddScoped<IToastService, ToastService>();
     services.AddScoped<FiltersWatcher>();
-
     var options = new IndicatorOptions();
     optionsBuilder?.Invoke(options);
     services.AddScoped<IIndicatorService, IndicatorService>(_ => new IndicatorService

@@ -1,0 +1,116 @@
+﻿@page "/admin/settings/category/{CategoryId:int}"
+@page "/admin/settings/category/new"
+
+@using RealEstateWebApp.UI.Components.Helpers
+@using RealEstateWebApp.UI.Components.SelectComponent
+@using RealEstateWebApp.Models.Property
+
+<div class="row">
+    <div class="col">
+        <section class="scroll-section">
+            <!-- Basic Start -->
+            <h2 class="small-title">General</h2>
+            <div class="card mb-5">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <input type="text" class="form-control" @bind-value="@_categoryModel.Title">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <EditableList TItem="RealEstateWebApp.Models.Property.PropertyWithValuesCountModel" Logic="this" @ref="_editableList" IsAutoLoad="false" SelectionChanged="OnSelectionChanged" Discard="Discard"MandatoryItems="MandatoryItems">
+
+            <LeftSubTitle>Properties</LeftSubTitle>
+            <RightSubTitle>Property edit</RightSubTitle>
+
+            <TableHead>
+                @* <th scope="col" class="col-number">#</th> *@
+                <th scope="col">Title</th>
+            </TableHead>
+
+            <TableRow>
+                @* <th scope="row">@context.Id</th> *@
+                <td>@context.Title</td>
+            </TableRow>
+
+            <EditForm Context="property">
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" @bind-value="@property.Item.Title" disabled="@property.IsReadOnly">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Type</label>
+                    <DropdownSelect @bind-Value="@property.Item.Type" Disabled="@(property.IsReadOnly || property.Item.RecordsCount > 0)" OnValueChanged="() => OnTypeChanged(property.Item)">
+                        <SelectItem Value="PropertyType.Text">Text</SelectItem>
+                        <SelectItem Value="PropertyType.Int">Int</SelectItem>
+                        <SelectItem Value="PropertyType.Float">Float</SelectItem>
+                        <SelectItem Value="PropertyType.ListSingle">ListSingle</SelectItem>
+                        <SelectItem Value="PropertyType.ListMultiple">ListMultiple</SelectItem>
+                        <SelectItem Value="PropertyType.Address">Address</SelectItem>
+                    </DropdownSelect>
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label class="form-label">Values</label>
+                        @if (IsListType(property.Item))
+                        {
+                            <button class="btn btn-icon btn-icon-start btn-outline-primary mb-1" type="button" disabled="@property.IsReadOnly" @onclick="AddValue">
+                                <i class="las la-plus"></i>
+                                <span>Add</span>
+                            </button>
+                        }
+                    </div>
+
+                    <table class="table responsive nowrap table-hover table inline-edit">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-number">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col" class="col-action"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var value in _values)
+                            {
+                                <tr>
+                                    <th scope="row">@(value.Id == 0 ? "-" : value.Id)</th>
+                                    <td>
+                                        <input type="text" class="form-control" @bind-value="value.Title" disabled="@property.IsReadOnly">
+                                    </td>
+                                    <th class="col-action">
+                                        @if (!property.IsReadOnly)
+                                        {
+                                            <button class="btn btn-sm btn-icon btn-icon-only btn-outline-danger" type="button" @onclick="() => DeleteValue(value)">
+                                                <i class="las la-trash"></i>
+                                            </button>
+                                        }
+                                    </th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </EditForm>
+
+        </EditableList>
+    </div>
+
+    <div class="col-md-auto d-none d-lg-block" id="scrollSpyMenu">
+        <div class="d-flex justify-content-around flex-column align-items-center w-70">
+            <button class="btn btn-icon btn-icon-start btn-outline-success mb-3 w-100" type="button" @onclick="SaveCategory">
+                <i class="las la-save"></i>
+                <span>Save</span>
+            </button>
+            <button class="btn btn-icon btn-icon-start btn-outline-warning mb-3 w-100" type="button" @onclick="DeleteCategory">
+                <i class="las la-history"></i>
+                <span>Delete</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+

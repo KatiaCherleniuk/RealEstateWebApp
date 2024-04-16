@@ -121,6 +121,11 @@
     <Build Include="StoredProcedures\Files\sp_Files_Insert.sql" />
     <Build Include="StoredProcedures\Files\sp_Files_GetByRecordId.sql" />
     <Build Include="StoredProcedures\Files\sp_Files_GetByIdAndRecordId.sql" />
+    <Build Include="Tables\CategoryDisplaySettings.sql" />
+    <Build Include="StoredProcedures\Properties\sp_Properties_GetAllWithValuesCount.sql" />
+    <Build Include="StoredProcedures\Properties\sp_Properties_Insert.sql" />
+    <Build Include="StoredProcedures\Properties\sp_Properties_Update.sql" />
+    <Build Include="StoredProcedures\Properties\sp_Properties_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

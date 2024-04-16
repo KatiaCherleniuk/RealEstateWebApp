@@ -12,6 +12,7 @@ AS
            U.LockoutEnd,
            U.AccessFailedCount,
            U.IsBlocked,
+           U.CreatedAt,
            R.Id AS RoleId, 
            R.Name AS RoleName
     FROM Users AS U

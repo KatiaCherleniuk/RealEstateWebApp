@@ -1,0 +1,17 @@
+﻿@using RealEstateWebApp.UI.Components.Tabs
+@using RealEstateWebApp.UI.Components.Settings
+@page "/admin/settings"
+
+<div class="row">
+    <TabsContainerComponent>
+        <TabElement Title="@Localizer["Categories"]">
+            <CategoriesSettingsComponent OnRowClick="GoToCategories" />
+        </TabElement>
+        <TabElement Title="@Localizer["Users"]">
+            <UserSettingsComponent/>
+        </TabElement>
+        <TabElement Title="@Localizer["Team"]">
+           
+        </TabElement>
+    </TabsContainerComponent>
+</div>

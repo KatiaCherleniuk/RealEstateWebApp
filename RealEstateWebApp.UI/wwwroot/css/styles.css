@@ -7323,8 +7323,10 @@ body.spinner #root {
   background: var(--fc-non-business-color); }
 
 .table-scroll {
-  overflow: auto;
-  height: calc(100vh - calc( var(--nav-size-slim) + calc(var(--main-spacing-horizontal) / 2)) - var(--card-spacing) * 2 - var(--card-fullsizebody-offset) - 1rem); }
+    overflow: auto;
+    /*height: calc(100vh - calc( var(--nav-size-slim) + calc(var(--main-spacing-horizontal) / 2)) - var(--card-spacing) * 2 - var(--card-fullsizebody-offset) - 1rem); }*/
+    height: fit-content;
+}
   .table-scroll thead {
     position: sticky;
     top: 0;
@@ -12822,6 +12824,46 @@ html[data-show='true'] .settings-button {
     margin-right: .5rem; }
 
 /********************** test ********************/
+.tabs {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 1px solid #E0E0E0;
+    margin-bottom: 0.5rem;
+}
+
+.tabs .tab-item {
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 0.75rem 0.25rem;
+    margin-right: 1.25rem;
+    margin-left: 1.25rem;
+    border-bottom: 2px solid transparent;
+    color: #414141; 
+    transition: all 0.3s ease-in-out;
+}
+
+.tabs .tab-item:hover {
+    border-color: rgba(235, 247, 248, 1);
+}
+
+.tabs .tab-item.active {
+    border-color: var(--primary);
+    color: var(--component-active-color);
+}
+
+.tabs .tab-item.active.invalid {
+    border-color: #dc3545 !important;
+}
+
+.tabs .tab-item.invalid {
+    color: #dc3545 !important;
+}
+
+.tabs-content {
+    height: 100%;
+    overflow: auto;
+}
+
 .user-profile-image {
   width: 7.5rem;
   height: 7.5rem;

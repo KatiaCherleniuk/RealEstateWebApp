@@ -123,6 +123,9 @@
   <data name="pl-PL" xml:space="preserve">
     <value>Polish</value>
   </data>
+  <data name="Price" xml:space="preserve">
+    <value />
+  </data>
   <data name="uk-UA" xml:space="preserve">
     <value>Ukrainian</value>
   </data>

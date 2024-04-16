@@ -12,6 +12,6 @@ namespace RealEstateWebApp.DataAccess.Repositories.Categories
         Task<bool> Remove(int id);
         Task<IEnumerable<CategoryWithRecordsCountModel>> GetAllWithRecordsCount();
         Task<IEnumerable<TitleAndIdModel>> GetAllTitleOnly();
-        Task<TitleAndIdModel> GetOneTitleOnly(int categoryId);
+        Task<CategoryEditModel> GetOneTitleOnly(int categoryId);
     }
 }

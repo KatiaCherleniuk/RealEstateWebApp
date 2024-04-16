@@ -80,6 +80,41 @@ namespace RealEstateWebApp.Business.Identity
 
             return await _userRepository.GetAllUsersForEdit();
         }
+        public async Task<(IEnumerable<UserCreateModel>, int)> GetAllManagers(string filter, int pageSize, int currentStep)
+        {
+            var result = await GetAllUsersForEdit();
+            var filteredResult = result.Where(user => user.RoleId == 3 &&
+            (
+                user.GetType().GetProperties().Any(property =>
+                {
+                    var value = property.GetValue(user);
+                    return value != null && value.ToString().Contains(filter);
+                })
+            ));
+            var totalCount = filteredResult.Count();
+
+            var pageIdList = filteredResult.Skip((currentStep - 1) * pageSize).Take(pageSize).ToArray();
+
+            return (pageIdList, totalCount);
+        }
+
+        public async Task<(IEnumerable<UserCreateModel>, int)> GetAllGuests(string filter, int pageSize, int currentStep)
+        {
+            var result = await GetAllUsersForEdit();
+            var filteredResult = result.Where(user => user.RoleId == 2 &&
+            (
+                user.GetType().GetProperties().Any(property =>
+                {
+                    var value = property.GetValue(user);
+                    return value != null && value.ToString().Contains(filter);
+                })
+            ));
+            var totalCount = filteredResult.Count();
+
+            var pageIdList = filteredResult.Skip((currentStep - 1) * pageSize).Take(pageSize).ToArray();
+
+            return (pageIdList, totalCount);
+        }
 
         public Task<IEnumerable<TitleAndIdModel>> GetAllRoles()
         {

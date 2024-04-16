@@ -37,13 +37,25 @@ namespace RealEstateWebApp.Business
         {
             return _categoryRepository.GetAllWithRecordsCount();
         }
+        public async Task<(IEnumerable<CategoryWithRecordsCountModel>, int)> GetAllWithFilter(string filter, int pageSize, int currentStep)
+        {
+            var result = await _categoryRepository.GetAllWithRecordsCount();
+            var filteredResult = result.Where(category => category.Title.Contains(filter));
+
+            var totalCount = filteredResult.Count(); 
+
+            var pageIdList = filteredResult.Skip((currentStep - 1) * pageSize).Take(pageSize).ToArray();
+
+
+            return (pageIdList, totalCount);
+        }
 
         public Task<IEnumerable<TitleAndIdModel>> GetAllTitleOnly()
         {
             return _categoryRepository.GetAllTitleOnly();
         }
 
-        public Task<TitleAndIdModel> GetOneTitleOnly(int categoryId)
+        public Task<CategoryEditModel> GetOneTitleOnly(int categoryId)
         {
             return _categoryRepository.GetOneTitleOnly(categoryId);
         }

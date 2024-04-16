@@ -1,0 +1,22 @@
+<div class="tabs">
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+<div class="tabs-content overflow-auto">
+    <ErrorBoundary @ref="errorBoundary">
+        <ChildContent>
+            @CurrentTab?.ChildContent
+        </ChildContent>
+        <ErrorContent>
+            <div class="tabs-error-wrapper">
+                <div>
+                    <div class="error-state">
+                        <div class="server-error-background"></div>
+                        <h3>HTTP ERROR 500</h3>
+                    </div>
+                </div>
+            </div>
+        </ErrorContent>
+    </ErrorBoundary>
+</div>
