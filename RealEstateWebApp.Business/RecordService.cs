@@ -11,6 +11,8 @@ using RealEstateWebApp.Models.RecordViewModels;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using RealEstateWebApp.Models.Record;
+using Newtonsoft.Json;
+using RealEstateWebApp.Models.Address;
 
 namespace RealEstateWebApp.Business
 {
@@ -58,11 +60,12 @@ namespace RealEstateWebApp.Business
         public async Task Create(RecordEditViewModel recordModel)
         {
             recordModel.CreatedAt = DateTime.Now;
-            await _recordRepository.Create(new RecordSQLModel(recordModel));
+            var recordSQl = new RecordSQLModel(recordModel);
+            await _recordRepository.Create(recordSQl);
             var tasks = new List<Task>();
             foreach (var value in recordModel.Values)
             {
-                value.RecordId = recordModel.Id;
+                value.RecordId = recordSQl.Id;
                 var task = _recordValueRepository.UpdateOrCreate(new RecordPropertyValueEditModel(value));
                 tasks.Add(task);
             }
@@ -86,7 +89,9 @@ namespace RealEstateWebApp.Business
 
         public async Task<FilterResponseModel> GetRecordsByFilterRequest(FilterRequestModel filterModel)
         {
-            var recordIdList = await _recordRepository.GetRecordsIdByFiltersAndOrder(filterModel.CategoryId, filterModel.Filters, filterModel.Order);
+            var a = "{\"Latitude\":50.945968828187,\"Longitude\":25.15739472773117,\"DisplayName\":\"Volyn Oblast, Rudka-Kozynska\",\"IsEnteredManually\":false,\"UpdatedAt\":\"2024-03-27T22:29:56.6460531+02:00\"}";
+            var r = JsonConvert.DeserializeObject<AddressModel>(a);
+                var recordIdList = await _recordRepository.GetRecordsIdByFiltersAndOrder(filterModel.CategoryId, filterModel.Filters, filterModel.Order);
             var pageIdList = recordIdList.Skip((filterModel.Page - 1) * filterModel.PageSize).Take(filterModel.PageSize).ToArray();
             var recordsTask = _recordRepository.GetRecordForViewSimplifiedByIdList(pageIdList);
             var valuesTask =  _recordValueRepository.GetRecordValuesByIdList(pageIdList);

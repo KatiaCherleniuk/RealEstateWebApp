@@ -1,4 +1,5 @@
-﻿using RealEstateWebApp.Models.Address;
+﻿using Newtonsoft.Json;
+using RealEstateWebApp.Models.Address;
 
 namespace RealEstateWebApp.Models.Record
 {
@@ -8,7 +9,19 @@ namespace RealEstateWebApp.Models.Record
         public int CategoryId { get; set; }
         public double Price { get; set; }
         public double Square { get; set; }
-        public AddressModel Address { get; set; }
+        public string AddressJson { get; set; }
         public DateTime CreatedAt { get; set; }
+        [JsonIgnore]
+        public AddressModel Address
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(AddressJson))
+                    return null; 
+                else
+                    return JsonConvert.DeserializeObject<AddressModel>(AddressJson);
+            }
+            set { AddressJson = JsonConvert.SerializeObject(value); }
+        }
     }
 }

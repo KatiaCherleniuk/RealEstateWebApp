@@ -20,10 +20,6 @@ namespace RealEstateWebApp.UI.Components.Settings
         public PaginationModel PaginationModel { get; set; }
 
         private string _filter { get; set; }
-        private int _paginationStepsSize { get; set; }
-        private int _pageSize { get; set; } = 8;
-        private int _currentStep { get; set; } = 1;
-        private int _totalSize { get; set; } 
         protected override async Task OnInitializedAsync()
         {
             PaginationModel = new PaginationModel()
@@ -38,7 +34,7 @@ namespace RealEstateWebApp.UI.Components.Settings
             await IndicatorService.StartTask(async () =>
             {
                 _filter = _filter ?? string.Empty;
-                var result = await CategoryService.GetAllWithFilter(_filter, _pageSize, _currentStep);
+                var result = await CategoryService.GetAllWithFilter(_filter, PaginationModel.PageSize, PaginationModel.CurrentStep);
                 Categories = result.Item1;
                 PaginationModel.TotalListSize = result.Item2;
 
