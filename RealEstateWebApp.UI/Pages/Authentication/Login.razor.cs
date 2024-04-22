@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
+using RealEstateWebApp.Models.User;
 
 namespace RealEstateWebApp.UI.Pages.Authentication
 {
@@ -31,24 +32,25 @@ namespace RealEstateWebApp.UI.Pages.Authentication
 
         protected override void OnInitialized()
         {
+            //Register();
             if (WebHostEnvironment.IsDevelopment())
             {
                 _login = "admin@admin.com";
                 _password = "Password1!";
-            }   
+            }
         }
-        
+
         //todo for test
-        // private Task Register()
-        // {
-        //     return UserManager.CreateAsync(new ApplicationUser()
-        //     {
-        //         Email = "admin@admin.com",
-        //         UserName = "admin",
-        //         EmailConfirmed = true,
-        //         RoleId = 1,
-        //     }, "Password1!");
-        // }
+        /*private Task Register()
+        {
+            return UserService.Create(new UserCreateModel()
+            {
+                Email = "user@user.com",
+                UserName = "user",
+                EmailConfirmed = true,
+                RoleId = 2,
+            }, "Password1!");
+        }*/
 
         private async Task DoLogin()
         {

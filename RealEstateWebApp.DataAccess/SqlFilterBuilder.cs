@@ -5,6 +5,7 @@ using Dapper;
 using RealEstateWebApp.Models.FilterAndOrder;
 using RealEstateWebApp.Models.Property;
 using Microsoft.Extensions.Logging;
+using RealEstateWebApp.Models;
 
 namespace RealEstateWebApp.DataAccess
 {
@@ -20,10 +21,10 @@ namespace RealEstateWebApp.DataAccess
         public DynamicParameters Parameters { get; private set; }
         public string Sql { get; private set; }
         
-        public void MakeSql(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order)
+        public void MakeSql(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order, ServiceType? type = null)
         {
             Parameters = new DynamicParameters();
-            var filterSql = MakeFilters(categoryId, filters);
+            var filterSql = MakeFilters(categoryId, filters, type);
             Sql = MakeOrder(filterSql, order);
             _logger.LogDebug(Sql);
         }
@@ -74,15 +75,22 @@ namespace RealEstateWebApp.DataAccess
                    + $"{orderPart} , F.RecordId DESC";
         }
 
-        private string MakeFilters(int categoryId, IEnumerable<BaseFilterValueModel> filters)
+        private string MakeFilters(int categoryId, IEnumerable<BaseFilterValueModel> filters, ServiceType? categoryType = null)
         {
             if (filters == null || !filters.Any())
             {
                 var key = "@CategoryId"; 
-                Parameters.Add(key, categoryId);            
+                Parameters.Add(key, categoryId); 
+                if(categoryType != null)
+                {
+                    var type = "@Type";
+                    Parameters.Add(type, categoryType);
+                    return $"SELECT Id AS RecordId FROM Records WHERE CategoryId = {key} AND Type = {type}";
+                }
+
                 return $"SELECT Id AS RecordId FROM Records WHERE CategoryId = {key}";
             }
-        
+
             var filtersSql = new List<string>();
             foreach (var filter in filters)
             {

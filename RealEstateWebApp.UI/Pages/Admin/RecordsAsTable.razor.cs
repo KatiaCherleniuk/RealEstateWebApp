@@ -26,7 +26,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
         [Inject] public RecordService RecordService { get; set; }
         [Inject] public CategoryService CategoryService { get; set; }
         [Inject] public PropertyService PropertyService { get; set; }
-        public PaginationModel PaginationModel { get; set; }
+        public PaginationModel PaginationModel { get; set; } = new();
 
         private bool _areRecordsLoadingInProgress;
         private int _totalRecords;

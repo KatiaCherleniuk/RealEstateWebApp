@@ -5145,6 +5145,7 @@ button {
   .card .card-img {
     border-radius: var(--border-radius-lg); }
   .card .card-img-top {
+    /*height: 180px;*/
     width: 100%;
     border-radius: initial;
     border-top-left-radius: var(--border-radius-lg);
@@ -12825,8 +12826,9 @@ html[data-show='true'] .settings-button {
 
 /********************** test ********************/
 .tabs {
+    align-items: center;
     display: flex;
-    overflow-x: auto;
+    /*overflow-x: auto;*/
     border-bottom: 1px solid #E0E0E0;
     margin-bottom: 0.5rem;
 }
@@ -13123,8 +13125,32 @@ html[data-show='true'] .settings-button {
   .properties-settings .properties-settings-sort-placeholder {
     height: 40px; }
 
+
+.records-cards-preview .badge {
+    width: 6rem;
+    padding: 0.4em 0.8em;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgb(0 0 0 / 2%) !important;
+    backdrop-filter: blur(8px);
+}
+
+.record-details div i {
+    font-size: 20px;
+    color: var(--primary);
+}
+
+.record-details div:last-child span:first-of-type {
+    font-weight: 900;
+    font-size: 16px;
+}
+.records-cards-preview .card:hover {
+    transition: scale linear .2s;
+    scale: 1.03;
+}
 @media (max-width: 1400px) {
-  :root {
+    : root {
     --main-spacing-horizontal: 0.8rem;
     --main-spacing-vertical: 0.5rem;
     --card-spacing: 0.5rem;

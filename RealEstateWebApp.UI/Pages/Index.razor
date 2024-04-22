@@ -1,0 +1,49 @@
+﻿@using RealEstateWebApp.UI.Components.Tabs
+@using RealEstateWebApp.UI.Components.Table
+@using RealEstateWebApp.UI.Components.Filter
+@using RealEstateWebApp.UI.Components.SelectComponent
+@using RealEstateWebApp.UI.Pages.User
+
+@page "/"
+<div class="records-cards-preview">
+    <div class="row">
+        @if (_notFound)
+        {
+            <div>
+                <span colspan="100%">No records found</span>
+            </div>
+        }
+        else
+        {
+            <TabsContainerComponent OnTabChanged="TabHasChanged">
+                <FilterBlock CategoryId="CurrentCategory.Id" Filter="@Filter"></FilterBlock>
+
+
+                <TabElement Title="@Localizer["All"]" Key="0">
+                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords"></RecordsAsCards>
+                </TabElement>
+
+                <TabElement Title="@Localizer["Rent"]" Key="1">
+                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords"></RecordsAsCards>
+                </TabElement>
+
+                <TabElement Title="@Localizer["Buying"]" Key="2">
+                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords"></RecordsAsCards>
+                </TabElement>
+
+                <div class="w-100" style="margin-left: 60%;">
+                    <DropdownSelect @bind-Value="CurrentCategory.Id" OnValueChanged="CategoryChanged">
+                        @foreach (var category in _categories)
+                        {
+                            <SelectItem Value="category.Id">@category.Title</SelectItem>
+                        }
+                    </DropdownSelect>
+                </div>
+
+
+            </TabsContainerComponent>
+
+        }
+    </div>
+
+</div>

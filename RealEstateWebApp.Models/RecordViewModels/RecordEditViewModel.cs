@@ -18,6 +18,7 @@ namespace RealEstateWebApp.Models.RecordViewModels
             Square = baseModel.Square;
             Address = baseModel.Address;
             CreatedAt = baseModel.CreatedAt;
+            Type = baseModel.Type;
         }
     }
 }

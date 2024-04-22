@@ -30,7 +30,6 @@ namespace RealEstateWebApp.UI.Controllers
                 return Redirect("/admin/dashboard" + returnUrl);
 
             return LocalRedirect("/" + returnUrl);
-            //"/admin/dashboard"
         }
 
         public async Task<IActionResult> Logout()

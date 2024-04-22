@@ -7,7 +7,8 @@ BEGIN
            R.Price,
            R.Square,
            R.Address AS AddressJson,
-           R.CreatedAt
+           R.CreatedAt,
+           R.Type
     FROM @IdList AS I
     INNER JOIN Records AS R ON I.Id = R.Id
 END

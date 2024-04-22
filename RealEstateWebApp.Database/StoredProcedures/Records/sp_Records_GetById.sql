@@ -6,7 +6,8 @@ AS
            R.Price,
            R.Square,
            R.Address,
-           R.CreatedAt
+           R.CreatedAt,
+           R.Type
     FROM Records AS R
     WHERE R.Id = @Id;
 RETURN 0

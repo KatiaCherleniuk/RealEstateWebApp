@@ -1,0 +1,51 @@
+﻿@using RealEstateWebApp.UI.Components.Tabs
+@using RealEstateWebApp.UI.Components.Table
+@using RealEstateWebApp.UI.Components.Filter
+@using RealEstateWebApp.UI.Components.SelectComponent
+
+
+@if (FilteredData == null || FilteredData.Records == null)
+{
+    @Localizer["No records found"];
+}
+else
+{
+    <section class="scroll-section">
+        <div class="mb-5 mt-5">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4" style="row-gap: 1rem;">
+                    @foreach (var record in FilteredData.Records)
+                    {
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="badge font-weight-bold text-uppercase">
+                                    @Localizer[record.Type.ToString()]
+                                </div>
+                                <img src="File/GetFirstByRecordId/@record.Id" class="card-img-top" alt="image">
+                                <div class="card-body p-4">
+                                    @*<h5 class="card-title">Card title</h5>*@
+                                    <p class="card-text record-details">
+                                        <div>
+                                            <i class="las la-map-marked-alt"></i>
+                                            <span>@record.Address?.DisplayName</span>
+                                        </div>
+                                        <div>
+                                            <i class="las la-ruler"></i>
+                                            <span>@record.Square</span>
+                                            <span>@Localizer["m"]<sup>2</sup></span>
+                                        </div>
+                                        <div>
+                                            <i class="las la-wallet"></i>
+                                            <span>@record.Price</span>
+                                            <span>@Localizer["hrn"]</span>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+            </div>
+        </div>
+    </section>
+    <Pagination PaginationModel="PaginationModel" OnStepClick="HandleStepClick"></Pagination>
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using RealEstateWebApp.Models;
 using RealEstateWebApp.Models.FilterAndOrder;
 using RealEstateWebApp.Models.Record;
 using RealEstateWebApp.Models.RecordViewModels;
@@ -12,7 +13,7 @@ namespace RealEstateWebApp.DataAccess.Repositories.Records
         Task<bool> Delete(int recordId);
         Task<RecordSQLModel> GetRecordForEdit(int recordId);
         Task<bool> Update(RecordSQLModel recordModel);
-        Task<IEnumerable<int>> GetRecordsIdByFiltersAndOrder(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order);
+        Task<IEnumerable<int>> GetRecordsIdByFiltersAndOrder(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order, ServiceType? type = null);
         Task<IEnumerable<RecordSimplifiedViewModel>> GetRecordForViewSimplifiedByIdList(IEnumerable<int> idList);
     }
 }

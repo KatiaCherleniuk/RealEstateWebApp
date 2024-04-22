@@ -11,6 +11,7 @@ namespace RealEstateWebApp.Models.Record
         public double Square { get; set; }
         public string AddressJson { get; set; }
         public DateTime CreatedAt { get; set; }
+        public ServiceType Type { get; set; }
         [JsonIgnore]
         public AddressModel Address
         {

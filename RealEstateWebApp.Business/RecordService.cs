@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using RealEstateWebApp.Models.Record;
 using Newtonsoft.Json;
 using RealEstateWebApp.Models.Address;
+using RealEstateWebApp.Models;
 
 namespace RealEstateWebApp.Business
 {
@@ -89,9 +90,7 @@ namespace RealEstateWebApp.Business
 
         public async Task<FilterResponseModel> GetRecordsByFilterRequest(FilterRequestModel filterModel)
         {
-            var a = "{\"Latitude\":50.945968828187,\"Longitude\":25.15739472773117,\"DisplayName\":\"Volyn Oblast, Rudka-Kozynska\",\"IsEnteredManually\":false,\"UpdatedAt\":\"2024-03-27T22:29:56.6460531+02:00\"}";
-            var r = JsonConvert.DeserializeObject<AddressModel>(a);
-                var recordIdList = await _recordRepository.GetRecordsIdByFiltersAndOrder(filterModel.CategoryId, filterModel.Filters, filterModel.Order);
+            var recordIdList = await _recordRepository.GetRecordsIdByFiltersAndOrder(filterModel.CategoryId, filterModel.Filters, filterModel.Order);
             var pageIdList = recordIdList.Skip((filterModel.Page - 1) * filterModel.PageSize).Take(filterModel.PageSize).ToArray();
             var recordsTask = _recordRepository.GetRecordForViewSimplifiedByIdList(pageIdList);
             var valuesTask =  _recordValueRepository.GetRecordValuesByIdList(pageIdList);
@@ -111,6 +110,21 @@ namespace RealEstateWebApp.Business
             
             return res;
         }
+        public async Task<FilterResponseModel> GetRecordsByFilterRequestForCards(FilterRequestModel filterModel, ServiceType? type)
+        {
+            var recordIdList = await _recordRepository.GetRecordsIdByFiltersAndOrder(filterModel.CategoryId, filterModel.Filters, filterModel.Order, type);
+            var pageIdList = recordIdList.Skip((filterModel.Page - 1) * filterModel.PageSize).Take(filterModel.PageSize).ToArray();
+            var recordsTask = _recordRepository.GetRecordForViewSimplifiedByIdList(pageIdList);
+            await Task.WhenAll(recordsTask);
+            var res = new FilterResponseModel
+            {
+                TotalItems = recordIdList.Count(),
+                Records = recordsTask.Result
+            };
+            return res;
+        }
+
+
 
         private void LogFilterRequest(FilterRequestModel filterModel, int totalItems)
         {

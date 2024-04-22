@@ -15,7 +15,7 @@ namespace RealEstateWebApp.UI.Services
             FilterModel = new FilterRequestModel()
             {
                 Filters = new List<BaseFilterValueModel>(),
-                PageSize = 5,
+                PageSize = 8,
                 Page = 1,
                 Order = new OrderByRecordOwnFieldModel() { IsDesc = true, RecordFieldName = "Id" }
             };
@@ -44,7 +44,7 @@ namespace RealEstateWebApp.UI.Services
 
         private void TriggerCallFilterChangedEvent()
         {
-            FilterModel.PageSize = 5;
+            FilterModel.PageSize = 8;
             FilterModel.Page = 1;
             FiltersChanged?.Invoke();
         }

@@ -7,6 +7,7 @@ using RealEstateWebApp.Models.Record;
 using RealEstateWebApp.Models.RecordViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using RealEstateWebApp.Models;
 
 namespace RealEstateWebApp.DataAccess.Repositories.Records
 {
@@ -42,9 +43,9 @@ namespace RealEstateWebApp.DataAccess.Repositories.Records
             return UpdateAsync(recordModel);
         }
 
-        public async Task<IEnumerable<int>> GetRecordsIdByFiltersAndOrder(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order)
+        public async Task<IEnumerable<int>> GetRecordsIdByFiltersAndOrder(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order, ServiceType? type = null)
         {
-            _sqlBuilder.MakeSql(categoryId, filters, order);
+            _sqlBuilder.MakeSql(categoryId, filters, order, type);
             using (var connection = await GetConnection())
             {
                 var rows = await connection.QueryAsync<int>(_sqlBuilder.Sql, _sqlBuilder.Parameters);
