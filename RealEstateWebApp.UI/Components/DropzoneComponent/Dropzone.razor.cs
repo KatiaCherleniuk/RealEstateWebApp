@@ -43,14 +43,13 @@ namespace RealEstateWebApp.UI.Components.DropzoneComponent
         }
         private void RemoveItem(FileWithSourceModel file)
         {
+            if (file.IsMain)
+                UploadedFiles.FirstOrDefault().IsMain = true;
+
             if(file.Id == 0)
-            {
                 UploadedFiles.Remove(file);
-            }
             else
-            {
                 file.IsDeleted = true;
-            }
         }
         private async Task OnChange(InputFileChangeEventArgs e)
         {
@@ -84,6 +83,8 @@ namespace RealEstateWebApp.UI.Components.DropzoneComponent
                         {
                             ToastService.ShowError(ex.Message);
                         }
+                        if (!UploadedFiles.Exists(x => x.IsMain))
+                            UploadedFiles.FirstOrDefault().IsMain = true;
                     }
 
                 }, "loading-preview");
@@ -92,6 +93,11 @@ namespace RealEstateWebApp.UI.Components.DropzoneComponent
         public List<FileWithSourceModel> GetUploadedPhotos()
         {
             return UploadedFiles;
+        }
+        public void ChangeMainPhoto(int fileId)
+        {
+            UploadedFiles.ForEach(x => x.IsMain = false);
+            UploadedFiles.FirstOrDefault(x => x.Id == fileId).IsMain = true;
         }
     }
 }

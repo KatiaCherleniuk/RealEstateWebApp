@@ -23,9 +23,19 @@ namespace RealEstateWebApp.UI.Controllers
         {
             var resImage = await _fileService.GetByIdAndRecordId(recordId, fileId);
             if (resImage == null || resImage.Length == 0)
-                return File("/images/user.png", "image/png", "avatar.png");
+                return File("~/img/record_no_image.jpg", "image/png");
             return File(resImage, "image/png");
         }
+
+        [HttpGet("/File/GetRecordMainImage/{recordId}")]
+        public async Task<IActionResult> GetRecordMainImage(int recordId)
+        {
+            var resImage = await _fileService.GetRecordMainImage(recordId);
+            if (resImage == null || resImage.Length == 0)
+                return File("~/img/record_no_image.jpg", "image/png");
+            return File(resImage, "image/png");
+        }
+
         [HttpGet("/File/GetFirstByRecordId/{recordId}")]
         public async Task<IActionResult> GetFirstByRecordId(int recordId)
         {

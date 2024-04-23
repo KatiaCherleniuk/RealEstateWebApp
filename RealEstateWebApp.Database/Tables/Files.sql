@@ -8,6 +8,7 @@
     [ContentType] NVARCHAR(250),
     [CreatedAt] DATETIME,
     [CreatedBy] INT NOT NULL,
+    [IsMain] BIT NOT NULL DEFAULT 0
     CONSTRAINT [FK_Files_Records] FOREIGN KEY ([RecordId]) REFERENCES [Records]([Id]),
     CONSTRAINT [FK_Files_Users] FOREIGN KEY ([CreatedBy]) REFERENCES [Users]([Id])
 )

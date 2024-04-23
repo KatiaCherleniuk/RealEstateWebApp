@@ -6,10 +6,11 @@
     @ContentType NVARCHAR(250),
     @IsDeleted BIT,
     @CreatedAt DATETIME,
-    @CreatedBy INT
+    @CreatedBy INT,
+    @IsMain BIT
 AS
-    INSERT INTO Files(RecordId, FilePath, Name, IsDeleted,CreatedAt, CreatedBy, ContentType) 
-    VALUES (@RecordId, @FilePath, @FileName, 0, @CreatedAt, @CreatedBy, @ContentType);
+    INSERT INTO Files(RecordId, FilePath, Name, IsDeleted,CreatedAt, CreatedBy, ContentType, IsMain) 
+    VALUES (@RecordId, @FilePath, @FileName, 0, @CreatedAt, @CreatedBy, @ContentType, @IsMain);
 
     SELECT @Id = SCOPE_IDENTITY();
 RETURN 0

@@ -27,7 +27,7 @@ namespace RealEstateWebApp.Business
         public async Task<bool> SaveFile(RecordsFileModel fileInfo)
         {
             if(fileInfo.Id != 0)
-                return await _fileRepository.Update(fileInfo.Id, fileInfo.IsDeleted);
+                return await _fileRepository.Update(fileInfo.Id, fileInfo.IsDeleted, fileInfo.IsMain);
 
             var fileName = Guid.NewGuid().ToString() + '.' + GetExtension(fileInfo.ContentType);
             var relativePath = Path.Combine(fileInfo.CategoryId.ToString(), fileInfo.RecordId.ToString());
@@ -103,6 +103,20 @@ namespace RealEstateWebApp.Business
             if (File.Exists(path))
             {
                 res = File.ReadAllBytes(path);
+            }
+            return res;
+        }
+        public async Task<byte[]> GetRecordMainImage(int recordId)
+        {
+            var filePath = await _fileRepository.GetRecordMainImage(recordId);
+            byte[] res = null;
+            if (filePath != null)
+            {
+                var path = GetFilePath(filePath);
+                if (File.Exists(path))
+                {
+                    res = File.ReadAllBytes(path);
+                }
             }
             return res;
         }

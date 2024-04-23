@@ -33,15 +33,23 @@
                         @foreach (var file in UploadedFiles.Where(file => file.IsDeleted == false))
                         {
                             <div class="dz-preview col border-0 h-auto me-0 dz-processing dz-image-preview dz-error dz-complete">
-                                <div class="d-flex flex-column border rounded-md">
+                                <div class="d-flex flex-column border rounded-md @(file.IsMain ? "border-primary" : "")" @onclick="() => ChangeMainPhoto(file.Id)">
+                                    
                                     <div class="p-0 position-relative image-container w-100">
                                         <div class="preview-container rounded-0 rounded-md-top">
                                             <img class="img-thumbnail border-0 rounded-0 rounded-md-top sh-18" src="@GetPhotoUrl(file)" />
                                         </div>
                                     </div>
+                                    @if (file.IsMain)
+                                    {
+                                        <div class="badge font-weight-bold text-uppercase">
+                                            @Localizer["Main"]
+                                        </div>
+                                    }
                                     <div class="ps-3 pt-3 pe-2 pb-1 dz-details position-relative w-100">
                                         <div><span data-dz-name="">@file.FileName</span></div>
                                     </div>
+                                    
                                     <button class="remove btn btn-icon btn-icon-only" @onclick="@(()=>RemoveItem(file))"><i class="las la-trash"></i></button>
                                 </div>
                             </div>

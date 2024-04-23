@@ -1,0 +1,83 @@
+﻿<div class="@(IsFullField ? "card-filled" : "card")">
+    @if (IsFullField)
+    {
+        <div class="filled-background"></div>
+        <button type="button" aria-label="Close" class="btn btn-icon btn-icon-only btn-outline-secondary" @onclick="CloseFullFill">
+            <i class="las la-times"></i>
+        </button>
+    }
+
+    <div class="carousel-base @BaseCarouselClass">
+        <div class=" blazor-carousel glide glide--ltr glide--slider glide--swipeable @(CssClass)" id="glideBasic">
+            @if (Imageset != null)
+            {
+                <div class="blazor-carousel-inner glide__track" data-glide-el="track">
+
+                    @foreach (var imageFile in Imageset)
+                    {
+                        if (string.IsNullOrWhiteSpace(imageFile.Description))
+                        {
+                            <li class="glide__slide p-0 blazor-carousel-image  @GetClasses()">
+                                <img class="d-block center card-img-top @(ImageClass) " src="@GetImageSource(imageFile)"
+                                     alt="@imageFile.FileName" @onclick="@(() => OnCarouselClick(this))">
+                            </li>
+                        }
+                        else
+                        {
+                            <div class="blazor-carousel-image card @GetClasses()">
+                                <img class="d-block center card-img-top @(ImageClass) " src="@GetImageSource(imageFile)"
+                                     alt="@imageFile.FileName" @onclick="@(() => OnCarouselClick(this))">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">@imageFile.FileName</h5>
+                                    <p class="card-text">@imageFile.Description.</p>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @(ResetRenderCounter())
+                </div>
+
+                @if (ShowNavigation)
+                {
+                    <div class="blazor-carousel-nav-container">
+                        <span class="glide__arrows slider-nav carousel-left-nav " data-glide-el="controls">
+                            <button class="btn btn-icon btn-icon-only   @(_activeImageIndex > 0 && Imageset.Count() > 1 ? "show btn-outline-primary" : "hide btn-outline-secondary")" data-glide-dir="<" @onclick="OnPreviousClicked">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="cs-icon cs-icon-chevron-left">
+                                    <path d="M13 16L7.35355 10.3536C7.15829 10.1583 7.15829 9.84171 7.35355 9.64645L13 4"></path>
+                                </svg>
+                            </button>
+                        </span>
+                        <span class="glide__arrows slider-nav carousel-right-nav" data-glide-el="controls">
+                            <button class="btn btn-icon btn-icon-only    @(_activeImageIndex < Imageset.Count() - 1 && Imageset.Count() > 1 ? "show btn-outline-primary" : "hide btn-outline-secondary")" data-glide-dir=">" @onclick="OnNextClicked">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="cs-icon cs-icon-chevron-right">
+                                    <path d="M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"></path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                    @(ResetRenderCounter())
+                }
+            }
+
+        </div>
+
+        @if (IsShowPreview)
+        {
+            if (Imageset != null)
+            {
+                <div class="blazor-carousel preview-list">
+                    @for (int indicatorIndexPrev = 0; indicatorIndexPrev < Imageset.Count; indicatorIndexPrev++)
+                    {
+                        int copiedIndexPrev = indicatorIndexPrev;
+                        <li class="@GetIndicatorPreviewState()">
+                            <img class="@PreviewImageClass" src="@GetImageSource(Imageset[copiedIndexPrev])" alt="@Imageset[copiedIndexPrev].FileName" @onclick="() => SetActiveImageIndex(copiedIndexPrev)">
+                        </li>
+                    }
+                    @(ResetRenderCounter())
+                </div>
+            }
+        }
+    </div>
+</div>

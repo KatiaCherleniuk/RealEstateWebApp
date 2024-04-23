@@ -20,15 +20,15 @@
 
 
                 <TabElement Title="@Localizer["All"]" Key="0">
-                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords"></RecordsAsCards>
+                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords" OnCardClick="RedirectToDetails"></RecordsAsCards>
                 </TabElement>
 
                 <TabElement Title="@Localizer["Rent"]" Key="1">
-                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords"></RecordsAsCards>
+                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords" OnCardClick="RedirectToDetails"></RecordsAsCards>
                 </TabElement>
 
                 <TabElement Title="@Localizer["Buying"]" Key="2">
-                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords"></RecordsAsCards>
+                    <RecordsAsCards ReloadItems="ReloadRecords" FilteredData="_filteredRecords" OnCardClick="RedirectToDetails"></RecordsAsCards>
                 </TabElement>
 
                 <div class="w-100" style="margin-left: 60%;">

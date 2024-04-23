@@ -9,5 +9,6 @@ namespace RealEstateWebApp.Models.Files
         public bool IsDeleted  { get; set; }
         public DateTime CreatedAt  { get; set; }
         public string CreatorName  { get; set; }
+        public bool IsMain  { get; set; }
     }
 }

@@ -13126,12 +13126,12 @@ html[data-show='true'] .settings-button {
     height: 40px; }
 
 
-.records-cards-preview .badge {
+.badge {
     width: 6rem;
     padding: 0.4em 0.8em;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 5%;
+    right: 5%;
     background-color: rgb(0 0 0 / 2%) !important;
     backdrop-filter: blur(8px);
 }

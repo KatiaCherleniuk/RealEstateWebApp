@@ -16,6 +16,7 @@ namespace RealEstateWebApp.UI.Pages
     {
         [Parameter] public string Filter { get; set; }
         [Inject] public IStringLocalizer<Resource> Localizer { get; set; }
+        [Inject] public NavigationManager NavigationManager { get; set; }
         [Inject] public RecordService RecordService { get; set; }
         [Inject] public CategoryService CategoryService { get; set; }
         [Inject] public FiltersWatcher FiltersWatcher { get; set; }
@@ -87,6 +88,10 @@ namespace RealEstateWebApp.UI.Pages
         {
             FiltersWatcher.SetCategoryId(CurrentCategory.Id);
             await ReloadRecords(FiltersWatcher.FilterModel.Page);
+        }
+        public void RedirectToDetails(int recordId)
+        {
+            NavigationManager.NavigateTo($"/recordDetails/{recordId}");
         }
     }
 }

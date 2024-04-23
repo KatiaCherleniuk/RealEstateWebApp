@@ -126,6 +126,7 @@
     <Build Include="StoredProcedures\Properties\sp_Properties_Insert.sql" />
     <Build Include="StoredProcedures\Properties\sp_Properties_Update.sql" />
     <Build Include="StoredProcedures\Properties\sp_Properties_Delete.sql" />
+    <Build Include="StoredProcedures\Files\sp_Files_GetRecordMainImage.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

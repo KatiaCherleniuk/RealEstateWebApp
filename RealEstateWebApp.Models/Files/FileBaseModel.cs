@@ -11,6 +11,7 @@ namespace RealEstateWebApp.Models.Files
         public string FileName { get; set; }
         public string ContentType { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsMain { get; set; }
 
     }
 }

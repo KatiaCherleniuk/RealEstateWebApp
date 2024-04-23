@@ -19,6 +19,7 @@ namespace RealEstateWebApp.UI.Pages.User
         [Parameter] public string Filter { get; set; }
 
         [Parameter] public Func<int, Task> ReloadItems { get; set; }
+        [Parameter] public Action<int> OnCardClick { get; set; }
         [Parameter] public FilterResponseModel FilteredData { get; set; }
         [Inject] public IStringLocalizer<Resource> Localizer { get; set; }
         [Inject] public RecordService RecordService { get; set; }

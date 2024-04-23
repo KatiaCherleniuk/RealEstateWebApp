@@ -16,9 +16,9 @@ namespace RealEstateWebApp.DataAccess.Repositories.Files
             return InsertWithIdAsync(file);
         }
 
-        public Task<bool> Update(int fileId, bool isDeleted)
+        public Task<bool> Update(int fileId, bool isDeleted, bool isMain)
         {
-            return PerformNonQuery("Update", new { Id = fileId, IsDeleted = isDeleted });
+            return PerformNonQuery("Update", new { Id = fileId, IsDeleted = isDeleted, IsMain = isMain });
         }
 
         public Task<IEnumerable<FileViewModel>> GetByRecordId(int recordId)
@@ -29,6 +29,10 @@ namespace RealEstateWebApp.DataAccess.Repositories.Files
         public Task<string> GetByIdAndRecordId(int recordId, int id)
         {
             return GetOneAsync<string>("GetByIdAndRecordId", new { Id = id, RecordId = recordId });
+        }
+        public Task<string> GetRecordMainImage(int recordId)
+        {
+            return GetOneAsync<string>("GetRecordMainImage", new {RecordId = recordId });
         }
     }
 }

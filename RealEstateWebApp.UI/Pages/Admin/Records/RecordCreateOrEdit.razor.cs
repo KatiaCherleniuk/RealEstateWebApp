@@ -95,7 +95,8 @@ namespace RealEstateWebApp.UI.Pages.Admin.Records
                     Id = file.Id,
                     Url = $"file/GetByIdAndRecordId?recordId={RecordId}&fileId={file.Id}",
                     FileName = file.FileName,
-                    IsDeleted = file.IsDeleted
+                    IsDeleted = file.IsDeleted,
+                    IsMain = file.IsMain
                 });
         }
 
@@ -163,7 +164,8 @@ namespace RealEstateWebApp.UI.Pages.Admin.Records
                     RecordId = _workingRecordModel.Id,
                     CategoryId = _workingRecordModel.CategoryId,
                     UserId = sessionUserResolver.User.Id,
-                    IsDeleted = item.IsDeleted
+                    IsDeleted = item.IsDeleted,
+                    IsMain = item.IsMain
                 };
                 await FileService.SaveFile(preparedFile);
             }
