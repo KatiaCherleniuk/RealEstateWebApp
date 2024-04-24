@@ -17,7 +17,7 @@ else
                     {
                         <div class="col">
                         <div class="card h-100" @onclick="(() => OnCardClick?.Invoke(record.Id))">
-                                <div class="badge font-weight-bold text-uppercase">
+                                <div class="badge badge-info font-weight-bold text-uppercase">
                                     @Localizer[record.Type.ToString()]
                                 </div>
                             <img src="File/GetRecordMainImage/@record.Id" class="card-img-top" alt="image">
@@ -35,7 +35,7 @@ else
                                         </div>
                                         <div>
                                             <i class="las la-wallet"></i>
-                                            <span>@record.Price</span>
+                                            <span class="font-weight-bold">@record.Price</span>
                                             <span>@Localizer["hrn"]</span>
                                         </div>
                                     </p>

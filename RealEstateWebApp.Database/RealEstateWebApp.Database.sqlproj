@@ -67,6 +67,7 @@
     <Folder Include="StoredProcedures\RecordPropertyValues" />
     <Folder Include="StoredProcedures\Stats" />
     <Folder Include="StoredProcedures\Files" />
+    <Folder Include="StoredProcedures\UserComments" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Roles.sql" />
@@ -127,6 +128,12 @@
     <Build Include="StoredProcedures\Properties\sp_Properties_Update.sql" />
     <Build Include="StoredProcedures\Properties\sp_Properties_Delete.sql" />
     <Build Include="StoredProcedures\Files\sp_Files_GetRecordMainImage.sql" />
+    <Build Include="StoredProcedures\Records\sp_Records_GetRecordForViewSimplified.sql" />
+    <Build Include="Tables\UserComments.sql" />
+    <Build Include="StoredProcedures\UserComments\sp_UserComments_Insert.sql" />
+    <Build Include="StoredProcedures\UserComments\sp_UserComments_Delete.sql" />
+    <Build Include="StoredProcedures\UserComments\sp_UserComments_GetUsersCommentByRecordId.sql" />
+    <Build Include="StoredProcedures\UserComments\sp_UserComments_GetAllUsersComments.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

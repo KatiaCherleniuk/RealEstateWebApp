@@ -57,5 +57,9 @@ namespace RealEstateWebApp.DataAccess.Repositories.Records
         {
             return GetManyAsync<RecordSimplifiedViewModel>("GetRecordForViewSimplifiedByIdList", idList.AsSqlIdTableParameters("@IdList"));
         }
+        public Task<RecordSimplifiedViewModel> GetRecordForViewSimplified(int recordId)
+        {
+            return GetOneAsync<RecordSimplifiedViewModel>("GetRecordForViewSimplified", new { RecordId = recordId });
+        }
     }
 }

@@ -1,14 +1,98 @@
 ﻿@using RealEstateWebApp.UI.Components.CarouselComponent
+@using RealEstateWebApp.Models.Property
+
 @page "/recordDetails/{RecordId:int}"
 
 <div>
-    @if (_recordFiles != null)
-    {
+    <div class="row">
+        <div class="col-12 col-xl-8 col-xxl-9 mb-5">
+        @if (_recordFiles != null)
+        {
+            <Carousel @ref="_carousel" Imageset="CarouselImage" ShowNavigation="true" IsShowPreview="true" OnCarouselItemClicked="OnCarouselItemClicked" />
+        }
 
-        <div class="row">
-            <div class="col-12 p-0 mb-5">
-                <Carousel @ref="_carousel" Imageset="CarouselImage" ShowNavigation="true" IsShowPreview="true" OnCarouselItemClicked="OnCarouselItemClicked" />
+        <section class="scroll-section" id="letterThumbs">
+                <h2 class="small-title mt-3">@Localizer["Main info"]</h2>
+                <div class="card mb-5">
+                    <div class="card-body record-details">
+                        <h3 class="mb-3 font-weight-bold">Record Name here to describe it</h3>
+                        <div class="cta-4 mb-2">
+                            <i class="las la-map-marked-alt font-weight-bold"></i>
+                            <span>@_record.Address?.DisplayName</span>
+                        </div>
+                        <div class="cta-4 mb-2">
+                            <i class="las la-ruler font-weight-bold"></i>
+                            <span>@_record.Square</span>
+                            <span>@Localizer["m"]<sup>2</sup></span>
+                        </div>
+                        <div class="cta-4 mb-2">
+                            <i class="las la-wallet font-weight-bold"></i>
+                            <span class="font-weight-bold">@_record.Price</span>
+                            <span>@Localizer["hrn"]</span>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="small-title mt-3">@Localizer["Overview"]</h2>
+                <div class="card mb-5">
+                    <div class="card-body record-details">
+                        @foreach (var property in _properties)
+                        {
+                            <div class="row mb-2">
+                                <div class="col-md-2 font-weight-bold">@property.Title</div>
+                                <div class="col-md-10">
+                                @{
+                                    if (property.Type == PropertyType.ListMultiple)
+                                    {
+                                        foreach (var propertyValue in _record.GetValueList(property))
+                                        {
+                                            <span class="badge bg-outline-primary" style="margin-right: 10px;">@propertyValue.Title</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @_record.GetValue(property)
+                                    }
+
+                                }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                
+                <h2 class="small-title mt-3">@Localizer["Location"]</h2>
+                @if (_record.Address != null && !_record.Address.IsEnteredManually)
+                {
+                    <div class="card mb-5">
+                        <div id="map" class="w-100" style="height: 350px;"></div>
+                    </div>
+                }
+                
+                
+            </section>
+
+        </div>
+        <div class="col-12 col-xl-4 col-xxl-3">
+            <div class="card cta">
+                <div class="card-body row g-0">
+                    <div class="col-12">
+                        <div class="cta-3 mb-1">@Localizer["Interested in this apartment?"]</div>
+                        <div class="mb-4 cta-3 text-primary">@Localizer["Don't waste time!"]</div>
+                        <div class="mb-3 cta-4 pe-3">
+                            @Localizer["Take the first step towards your perfect home right now!"]
+                        </div>
+                        <div class="text-muted mb-5 pe-3">@Localizer["Click the button below, and our agents will gladly assist you with any questions and arrange a viewing"]</div>
+                            
+                        <div class="d-flex align-items-center position-relative">
+                            <button class="btn btn-icon btn-icon-start btn-primary w-100" @onclick="OpenModal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-send undefined"><path d="M12.6593 16.3216L17.5346 3.86246C17.7992 3.18631 17.9315 2.84823 17.8211 2.64418C17.7749 2.55868 17.7047 2.48851 17.6192 2.44226C17.4152 2.3319 17.0771 2.46419 16.4009 2.72877L3.94174 7.60411L3.94173 7.60411C3.24079 7.87839 2.89031 8.01553 2.81677 8.23918C2.786 8.33274 2.78356 8.43332 2.80974 8.52827C2.87231 8.75522 3.2157 8.90925 3.90249 9.21731L8.53011 11.293L8.53012 11.293C8.65869 11.3507 8.72298 11.3795 8.77572 11.4235C8.79902 11.4429 8.82052 11.4644 8.83993 11.4877C8.88385 11.5404 8.91269 11.6047 8.97037 11.7333L11.0461 16.3609C11.3541 17.0477 11.5082 17.3911 11.7351 17.4537C11.8301 17.4798 11.9306 17.4774 12.0242 17.4466C12.2479 17.3731 12.385 17.0226 12.6593 16.3216Z"></path><path d="M11.8994 8.36395L9.07099 11.1924"></path></svg>
+                                <span>@Localizer["Send"]</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    }
+    </div>
+
 </div>

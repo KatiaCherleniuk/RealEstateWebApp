@@ -15,5 +15,6 @@ namespace RealEstateWebApp.DataAccess.Repositories.Records
         Task<bool> Update(RecordSQLModel recordModel);
         Task<IEnumerable<int>> GetRecordsIdByFiltersAndOrder(int categoryId, IEnumerable<BaseFilterValueModel> filters, BaseOrderModel order, ServiceType? type = null);
         Task<IEnumerable<RecordSimplifiedViewModel>> GetRecordForViewSimplifiedByIdList(IEnumerable<int> idList);
+        Task<RecordSimplifiedViewModel> GetRecordForViewSimplified(int recordId);
     }
 }

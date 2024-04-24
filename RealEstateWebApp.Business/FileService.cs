@@ -73,7 +73,8 @@ namespace RealEstateWebApp.Business
                 ContentType = info.ContentType,
                 IsDeleted = false,
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = info.UserId
+                CreatedBy = info.UserId,
+                IsMain = info.IsMain
             };
         }
 

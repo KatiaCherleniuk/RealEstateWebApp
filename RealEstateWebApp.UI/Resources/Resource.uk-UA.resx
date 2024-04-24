@@ -138,4 +138,19 @@
   <data name="uk-UA" xml:space="preserve">
     <value>Українська</value>
   </data>
+  <data name="RequiredError" xml:space="preserve">
+    <value>{0} є обов'язковим</value>
+  </data>
+  <data name="IncorrectLength" xml:space="preserve">
+    <value>Довжина {0} є некоректною</value>
+  </data>
+  <data name="IncorrectField" xml:space="preserve">
+    <value>Поле {0} є некоректним</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Номер телефону</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Коментар</value>
+  </data>
 </root>

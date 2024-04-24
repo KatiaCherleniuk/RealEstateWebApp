@@ -1,12 +1,29 @@
 ﻿(function (scope) {
     scope.map = scope.map || {};
     scope.map.initMap = _initMap;
+    scope.map.showMap = _showMap;
     let _map = {};
     let _markers;
     let _marker = false; 
     let _ref;
     const mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const searchURL = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat={lat}&lon={lon}';
+
+    function _showMap(lat, long, addressName) {
+        if (!document.getElementById('map')) {
+            return;
+        }
+
+        _map = L.map('map').setView({ lon: long || 30, lat: lat || 50 }, 12);
+
+        L.tileLayer(mapURL, {
+            maxZoom: 19,
+        }).addTo(_map);
+
+        _markers = L.layerGroup([]);
+        _map.addLayer(_markers);
+        makeMarker([lat, long], addressName);
+    }
     function _initMap(ref, lat, long) {
         _ref = ref;
         _map = L.map('map').setView({ lon: long || 30, lat: lat || 50 }, 6);
@@ -81,11 +98,12 @@
 
         _marker.setLatLng(latlng);
         _markers.addLayer(_marker);
-        _marker.bindPopup(address).openPopup();
-        _ref.invokeMethodAsync('OnAddressCoordinatesChanged', latitude, longitude, address);
-
-        
-
+        if (address != null) {
+            _marker.bindPopup(address).openPopup();
+        }
+        if (_ref != null) {
+            _ref.invokeMethodAsync('OnAddressCoordinatesChanged', latitude, longitude, address);
+        }
     }
     function reverseGeocode(lat, lng) {
 

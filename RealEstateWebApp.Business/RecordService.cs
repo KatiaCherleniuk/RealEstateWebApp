@@ -57,7 +57,15 @@ namespace RealEstateWebApp.Business
 
             return res;
         }
-        
+        public async Task<RecordSimplifiedViewModel> GetRecordForView(int recordId)
+        {
+            var values = await _recordValueRepository.GetRecordValuesByRecordId(recordId);
+            var record = await _recordRepository.GetRecordForViewSimplified(recordId);
+
+            record.Values = values.ToList();
+            return record;
+        }
+
         public async Task Create(RecordEditViewModel recordModel)
         {
             recordModel.CreatedAt = DateTime.Now;

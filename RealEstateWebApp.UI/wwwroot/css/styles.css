@@ -11056,7 +11056,7 @@ h6,
   font-weight: 300 !important; }
 
 .font-weight-bold {
-  font-weight: 600; }
+  font-weight: 900; }
 
 [class*='cs-'] {
   font-size: 18px; }
@@ -13126,7 +13126,7 @@ html[data-show='true'] .settings-button {
     height: 40px; }
 
 
-.badge {
+.badge.badge-info {
     width: 6rem;
     padding: 0.4em 0.8em;
     position: absolute;
@@ -13141,14 +13141,25 @@ html[data-show='true'] .settings-button {
     color: var(--primary);
 }
 
-.record-details div:last-child span:first-of-type {
-    font-weight: 900;
-    font-size: 16px;
-}
 .records-cards-preview .card:hover {
     transition: scale linear .2s;
     scale: 1.03;
 }
+.card.cta{
+    position: sticky;
+    top: 90px;
+}
+#map {
+    border-radius: var(--border-radius-lg);
+}
+.validation-message {
+    color: var(--danger);
+    font-size: 12px;
+}
+.form-control.invalid{
+    border-color: var(--danger);
+}
+
 @media (max-width: 1400px) {
     : root {
     --main-spacing-horizontal: 0.8rem;

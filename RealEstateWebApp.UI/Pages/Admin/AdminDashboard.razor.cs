@@ -17,7 +17,7 @@ namespace RealEstateWebApp.UI.Pages.Admin
         public List<StatsAveragePrices> prices { get; set; } =  new List<StatsAveragePrices>();
         protected override async Task OnInitializedAsync()
         {
-            recordsByStatus = await StatisticService.GetRecordsByStatuses(DateTime.Today.AddDays(-30));
+            recordsByStatus = await StatisticService.GetRecordsByStatuses(DateTime.Today.AddDays(-100));
             users = await StatisticService.GetStatisticByUsers(IntervalType.Month, 12);
             categories = await StatisticService.GetRecordsByCategories(DateTime.Today.AddDays(-30));
             prices = await StatisticService.GetAveragePrices(IntervalType.Month, 3);

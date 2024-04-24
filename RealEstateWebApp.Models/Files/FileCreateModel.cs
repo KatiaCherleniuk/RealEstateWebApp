@@ -12,5 +12,6 @@ namespace RealEstateWebApp.Models.Files
         public DateTime CreatedAt  { get; set; }
         public int CreatedBy  { get; set; }
         public string ContentType  { get; set; }
+        public bool IsMain  { get; set; }
     }
 }

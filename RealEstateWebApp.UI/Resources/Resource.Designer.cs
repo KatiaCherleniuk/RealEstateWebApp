@@ -61,6 +61,15 @@ namespace RealEstateWebApp.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string en_US {
@@ -70,11 +79,47 @@ namespace RealEstateWebApp.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is incorrect.
+        /// </summary>
+        public static string IncorrectField {
+            get {
+                return ResourceManager.GetString("IncorrectField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legth of {0} is incorrect.
+        /// </summary>
+        public static string IncorrectLength {
+            get {
+                return ResourceManager.GetString("IncorrectLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Polish.
         /// </summary>
         public static string pl_PL {
             get {
                 return ResourceManager.GetString("pl-PL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is required.
+        /// </summary>
+        public static string RequiredError {
+            get {
+                return ResourceManager.GetString("RequiredError", resourceCulture);
             }
         }
         

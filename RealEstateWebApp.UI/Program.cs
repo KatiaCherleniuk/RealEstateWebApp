@@ -15,6 +15,7 @@ using RealEstateWebApp.DataAccess.Repositories.UserSettings;
 using RealEstateWebApp.UI.Components.ToastComponent;
 using RealEstateWebApp.DataAccess.Repositories.Stats;
 using RealEstateWebApp.UI.Components.ToastComponent.Services;
+using RealEstateWebApp.DataAccess.UserComments;
 
 
 
@@ -99,6 +100,7 @@ void AddBusiness(IServiceCollection services)
     services.AddSingleton<PropertyValueService>();
     services.AddSingleton<RecordService>();
     services.AddScoped<UserService>();
+    services.AddScoped<UserCommentsService>();
 }
 void AddDataAccess(IServiceCollection services)
 {
@@ -112,6 +114,7 @@ void AddDataAccess(IServiceCollection services)
     services.AddSingleton<IFileRepository, FileRepository>();
     services.AddSingleton<IUserSettingsRepository, UserSettingsRepository>();
     services.AddSingleton<IStatisticRepository, StatisticRepository>();
+    services.AddSingleton<IUserCommentsRepository, UserCommentsRepository>();
 }
 
 void AddIdentity(IServiceCollection services)

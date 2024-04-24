@@ -94,10 +94,11 @@ namespace RealEstateWebApp.UI.Components.DropzoneComponent
         {
             return UploadedFiles;
         }
-        public void ChangeMainPhoto(int fileId)
+        public void ChangeMainPhoto(FileWithSourceModel file)
         {
             UploadedFiles.ForEach(x => x.IsMain = false);
-            UploadedFiles.FirstOrDefault(x => x.Id == fileId).IsMain = true;
+            var i = UploadedFiles.IndexOf(file);
+            UploadedFiles[i].IsMain = true;
         }
     }
 }
